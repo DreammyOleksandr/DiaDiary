@@ -11,7 +11,7 @@ public class LogEntry
 
     public DateTime Date { get; set; } = DateTime.Today;
 
-    public DateTime time = DateTime.Now;
+    private DateTime time = DateTime.Now;
 
     public DateTime Time
     {
