@@ -10,17 +10,7 @@ public class LogEntry
     public int LongTermInsulin { get; set; }
 
     public DateTime Date { get; set; } = DateTime.Today;
-
-    private DateTime time = DateTime.Now;
-
-    public DateTime Time
-    {
-        get { return time; }
-        set
-        {
-            value = Convert.ToDateTime(time.ToString("t"));
-        }
-    }
+    public DateTime Time { get; set; } = DateTime.Now;
 
     [Range(0, 250)] public string Notes { get; set; }
 }
