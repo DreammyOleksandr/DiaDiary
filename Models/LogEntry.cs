@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace DiaDiary;
+namespace Models;
 
 public class LogEntry
 {
