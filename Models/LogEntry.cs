@@ -1,10 +1,13 @@
 using System.ComponentModel.DataAnnotations;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Models;
 
 public class LogEntry
 {
-    [Range(0, 50)] public int GlucoseLevel { get; set; }
+    [BsonId,BsonRepresentation(BsonType.ObjectId),Range(0, 50)] public string Id { get; set; }
+    public int GlucoseLevel { get; set; }
     [Range(0, 50)] public int CarbohydratesInBreadUnits { get; set; }
     public int ShortTermInsulin { get; set; }
     public int LongTermInsulin { get; set; }

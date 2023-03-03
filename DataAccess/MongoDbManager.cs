@@ -22,11 +22,16 @@ public class MongoDbManager
         var _db = _client.GetDatabase(DbName);
         var collection = _db.GetCollection<LogEntry>(collectionName);
     }
-    public static async Task GetAll(LogEntry logEntry)
+    public static void GetAll()
     {
         var _db = _client.GetDatabase(DbName);
         var collection = _db.GetCollection<LogEntry>(collectionName);
-        await collection.FindAsync(_ => true);
+        var entries = collection.Find(_ => true);
+
+        foreach (var entry in entries.ToList())
+        {
+            Console.WriteLine($"Glucose level = {entry.GlucoseLevel}");
+        }
 
     }
 }

@@ -7,14 +7,16 @@ class Program
 {
     static void Main(string[] args)
     {
-        LogEntry userEntry = new LogEntry()
+        MongoDbManager.Create(new LogEntry()
         {
-            CarbohydratesInBreadUnits = 2,
-            GlucoseLevel = 0,
-            ShortTermInsulin = 1,
-            LongTermInsulin = 3,
-        };
+            GlucoseLevel = 8,
+            ShortTermInsulin = 6,
+            LongTermInsulin = 6,
+            CarbohydratesInBreadUnits = 6,
+        });
         
-        MongoDbManager.Create(userEntry);
+        
+        
+        MongoDbManager.GetAll();
     }
 }
