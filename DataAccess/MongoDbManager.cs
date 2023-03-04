@@ -37,12 +37,12 @@ public class MongoDbManager
         var collection = _db.GetCollection<LogEntry>(collectionName);
     }
     //Delete
-    public static void DeleteByDate()
+    public static void DeleteByGlucoseLevel()
     {
-        Console.WriteLine("Choose note which you want to delete by date of its creation");
-        DateTime DateEntrieToDelete = Convert.ToDateTime(Console.ReadLine());
+        Console.WriteLine("Choose note which you want to delete by glucose level");
+        string GlucoseEntrieToDelete = Console.ReadLine();
         var _db = _client.GetDatabase(DbName);
         var collection = _db.GetCollection<LogEntry>(collectionName);
-        collection.DeleteOne(p => p.Date == DateEntrieToDelete);
+        collection.DeleteOne(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
     }
 }
