@@ -11,17 +11,14 @@ public class MongoDbManager
     
     private static readonly MongoClient _client = new MongoClient(ConnectionString);
 
+    //Create
     public static async Task Create(LogEntry logEntry)
     {
         var _db = _client.GetDatabase(DbName);
         var collection = _db.GetCollection<LogEntry>(collectionName);
         await collection.InsertOneAsync(logEntry);
     }
-    public static void Update()
-    {
-        var _db = _client.GetDatabase(DbName);
-        var collection = _db.GetCollection<LogEntry>(collectionName);
-    }
+    //Read
     public static void GetAll()
     {
         var _db = _client.GetDatabase(DbName);
@@ -32,6 +29,20 @@ public class MongoDbManager
         {
             Console.WriteLine($"Glucose level = {entry.GlucoseLevel}");
         }
-
+    }
+    //Update
+    public static void Update()
+    {
+        var _db = _client.GetDatabase(DbName);
+        var collection = _db.GetCollection<LogEntry>(collectionName);
+    }
+    //Delete
+    public static void DeleteByDate()
+    {
+        Console.WriteLine("Choose note which you want to delete by date of its creation");
+        DateTime DateEntrieToDelete = Convert.ToDateTime(Console.ReadLine());
+        var _db = _client.GetDatabase(DbName);
+        var collection = _db.GetCollection<LogEntry>(collectionName);
+        collection.DeleteOne(p => p.Date == DateEntrieToDelete);
     }
 }

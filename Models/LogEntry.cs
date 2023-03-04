@@ -6,7 +6,10 @@ namespace Models;
 
 public class LogEntry
 {
-    [BsonId,BsonRepresentation(BsonType.ObjectId),Range(0, 50)] public string Id { get; set; }
+    private uint LogPosition = 1;
+    
+    [BsonId,BsonRepresentation(BsonType.ObjectId),Range(0, 50)]
+    public string Id { get; set; }
     public int GlucoseLevel { get; set; }
     [Range(0, 50)] public int CarbohydratesInBreadUnits { get; set; }
     public int ShortTermInsulin { get; set; }
