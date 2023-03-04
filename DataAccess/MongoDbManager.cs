@@ -3,15 +3,9 @@ using MongoDB.Driver;
 
 namespace DataAccess;
 
-public class MongoDbManager
+public class MongoDbManager : ApplicationDbContext
 {
-    private const string ConnectionString = "mongodb://127.0.0.1:27017";
-    private const string DbName = "diabeticslogs";
-    private static readonly string collectionName = "LogEntries";
-    
-    private static readonly MongoClient _client = new MongoClient(ConnectionString);
 
-    //Create
     public static async Task Create(LogEntry logEntry)
     {
         var _db = _client.GetDatabase(DbName);
@@ -19,11 +13,11 @@ public class MongoDbManager
         await collection.InsertOneAsync(logEntry);
     }
     //Read
-    public static void GetAll()
+    public static async Task GetAll()
     {
         var _db = _client.GetDatabase(DbName);
         var collection = _db.GetCollection<LogEntry>(collectionName);
-        var entries = collection.Find(_ => true);
+        var entries = await collection.FindAsync(_ => true);
 
         foreach (var entry in entries.ToList())
         {
@@ -31,18 +25,18 @@ public class MongoDbManager
         }
     }
     //Update
-    public static void Update()
+    public static async Task Update()
     {
         var _db = _client.GetDatabase(DbName);
         var collection = _db.GetCollection<LogEntry>(collectionName);
     }
     //Delete
-    public static void DeleteByGlucoseLevel()
+    public static async Task DeleteByGlucoseLevel()
     {
         Console.WriteLine("Choose note which you want to delete by glucose level");
         string GlucoseEntrieToDelete = Console.ReadLine();
         var _db = _client.GetDatabase(DbName);
         var collection = _db.GetCollection<LogEntry>(collectionName);
-        collection.DeleteOne(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
+        collection.DeleteOneAsync(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
     }
 }
