@@ -6,7 +6,6 @@ namespace Models;
 
 public class LogEntry
 {
-    private uint LogPosition = 1;
     
     [BsonId,BsonRepresentation(BsonType.ObjectId),Range(0, 50)]
     public string Id { get; set; }
@@ -19,4 +18,7 @@ public class LogEntry
     public DateTime Time { get; set; } = DateTime.Now;
 
     [Range(0, 250)] public string Notes { get; set; }
+    
+    public static uint LogNumber;
+
 }

@@ -5,10 +5,11 @@ namespace DataAccess;
 
 public class MongoDbManager : ApplicationDbContext
 { 
-    static IMongoCollection<LogEntry> collection = _db.GetCollection<LogEntry>(collectionName);
+    static readonly IMongoCollection<LogEntry> collection = _db.GetCollection<LogEntry>(collectionName);
     
     public static async Task Create(LogEntry logEntry)
     {
+        LogEntry.LogNumber++;
         await collection.InsertOneAsync(logEntry);
     }
     //Read
@@ -18,7 +19,11 @@ public class MongoDbManager : ApplicationDbContext
 
         foreach (var entry in entries.ToList())
         {
-            Console.WriteLine($"Glucose level = {entry.GlucoseLevel}");
+            Console.WriteLine($"{LogEntry.LogNumber}) Time: {entry.Time:t}\n\n"+
+                              $"Glucose level: {entry.GlucoseLevel}\n" +
+                              $"Short term insulin: {entry.ShortTermInsulin}\n" +
+                              $"Long term insulin: {entry.LongTermInsulin}\n" +
+                              $"Carbs (Bread units): {entry.CarbsInBreadUnits}\n");
         }
     }
     //Update
@@ -31,7 +36,15 @@ public class MongoDbManager : ApplicationDbContext
     {
         Console.WriteLine("Choose note which you want to delete by glucose level");
         string GlucoseEntrieToDelete = Console.ReadLine();
-        
-        collection.DeleteOneAsync(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
+
+
+        try
+        {
+            await collection.FindAsync(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
+        }
+        catch
+        {
+            Console.WriteLine("Something went wrong");
+        }
     }
 }

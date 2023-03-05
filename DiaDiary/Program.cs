@@ -9,11 +9,12 @@ class Program
     {
         MongoDbManager.Create(new LogEntry()
         {
-            GlucoseLevel = 8,
-            ShortTermInsulin = 5,
-            LongTermInsulin = 6,
-            CarbsInBreadUnits = 5,
+            GlucoseLevel = 3,
+            ShortTermInsulin = 0,
+            LongTermInsulin = 0,
+            CarbsInBreadUnits = 2,
         });
         Console.ReadKey();
+        MongoDbManager.GetAll();
     }
 }
