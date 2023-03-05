@@ -4,19 +4,16 @@ using MongoDB.Driver;
 namespace DataAccess;
 
 public class MongoDbManager : ApplicationDbContext
-{
-
+{ 
+    static IMongoCollection<LogEntry> collection = _db.GetCollection<LogEntry>(collectionName);
+    
     public static async Task Create(LogEntry logEntry)
     {
-        var _db = _client.GetDatabase(DbName);
-        var collection = _db.GetCollection<LogEntry>(collectionName);
         await collection.InsertOneAsync(logEntry);
     }
     //Read
     public static async Task GetAll()
     {
-        var _db = _client.GetDatabase(DbName);
-        var collection = _db.GetCollection<LogEntry>(collectionName);
         var entries = await collection.FindAsync(_ => true);
 
         foreach (var entry in entries.ToList())
@@ -27,16 +24,14 @@ public class MongoDbManager : ApplicationDbContext
     //Update
     public static async Task Update()
     {
-        var _db = _client.GetDatabase(DbName);
-        var collection = _db.GetCollection<LogEntry>(collectionName);
+
     }
     //Delete
     public static async Task DeleteByGlucoseLevel()
     {
         Console.WriteLine("Choose note which you want to delete by glucose level");
         string GlucoseEntrieToDelete = Console.ReadLine();
-        var _db = _client.GetDatabase(DbName);
-        var collection = _db.GetCollection<LogEntry>(collectionName);
+        
         collection.DeleteOneAsync(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
     }
 }
