@@ -8,5 +8,6 @@ class Program
     static void Main(string[] args)
     {
         DefaultMessages.Welcome();
+        UserActions.ChooseAction();
     }
 }

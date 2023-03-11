@@ -14,7 +14,11 @@ public class DefaultMessages
 
     public static void Creation()
     {
-        Console.WriteLine("To create your log fill next fields:");
+        Console.WriteLine("To create your log fill next fields:\n"
+                          +"Glucose level\n"
+                          +"Short term insulin dose\n"
+                          +"Long term insulin dose\n"
+                          +"Notes(optional)\n");
     }
     public static void SuccessfulCreation()
     {
