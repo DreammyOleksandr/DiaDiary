@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Driver;
 
 namespace Models;
 
@@ -18,6 +19,4 @@ public class LogEntry
     public DateTime Time { get; set; } = DateTime.Now;
 
     [Range(0, 250)] public string Notes { get; set; }
-    
-    public static uint LogNumber;
 }
