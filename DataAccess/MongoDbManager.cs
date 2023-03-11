@@ -32,10 +32,10 @@ public class MongoDbManager : ApplicationDbContext
 
     }
     //Delete
-    public static async Task DeleteByGlucoseLevel()
+    public static async Task Delete()
     {
         Console.WriteLine("Choose note which you want to delete by glucose level");
         string GlucoseEntrieToDelete = Console.ReadLine();
-        await collection.FindAsync(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
+        await collection.DeleteOneAsync(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
     }
 }

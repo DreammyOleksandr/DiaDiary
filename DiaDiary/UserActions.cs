@@ -22,6 +22,16 @@ public class UserActions
                     Notes = Console.ReadLine(),
                 });
                 break;
+            case 's':
+                DefaultMessages.ViewLogs();
+                MongoDbManager.GetAll();
+                break;
+            case 'u':
+                break;
+            case 'd':
+                DefaultMessages.Deleteion();
+                MongoDbManager.Delete();
+                break;
         }
     }
 }

@@ -6,9 +6,9 @@ public class DefaultMessages
     {
         Console.WriteLine("Hello user!\n\nType\n"
                           + "c to create new log\n"
-                          + "d to delete chosen log\n"
+                          + "s to show all logs\n"
                           + "u to update chosen log\n"
-                          + "s to show all logs\n\n"
+                          + "d to delete chosen log\n\n"
                           +"*Case doesn't matter*");
     }
 
@@ -18,6 +18,7 @@ public class DefaultMessages
                           +"Glucose level\n"
                           +"Short term insulin dose\n"
                           +"Long term insulin dose\n"
+                          +"Carbs eaten (bread units)\n"
                           +"Notes(optional)\n");
     }
     public static void SuccessfulCreation()
@@ -26,7 +27,7 @@ public class DefaultMessages
     }
     public static void Deleteion()
     {
-        Console.WriteLine("Choose log you want to delete");
+        Console.WriteLine("Choose log you want to delete by typing glucose level of log(experimental)");
     }
     public static void SuccessfulDeleteion()
     {
