@@ -9,8 +9,8 @@ public class LogEntry
     
     [BsonId,BsonRepresentation(BsonType.ObjectId),Range(0, 50)]
     public string Id { get; set; }
-    public int GlucoseLevel { get; set; }
-    [Range(0, 50)] public int CarbsInBreadUnits { get; set; }
+    public double GlucoseLevel { get; set; }
+    [Range(0, 50)] public double CarbsInBreadUnits { get; set; }
     public int ShortTermInsulin { get; set; }
     public int LongTermInsulin { get; set; }
 
@@ -20,5 +20,4 @@ public class LogEntry
     [Range(0, 250)] public string Notes { get; set; }
     
     public static uint LogNumber;
-
 }

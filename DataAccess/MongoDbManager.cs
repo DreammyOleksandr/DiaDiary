@@ -36,15 +36,6 @@ public class MongoDbManager : ApplicationDbContext
     {
         Console.WriteLine("Choose note which you want to delete by glucose level");
         string GlucoseEntrieToDelete = Console.ReadLine();
-
-
-        try
-        {
-            await collection.FindAsync(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
-        }
-        catch
-        {
-            Console.WriteLine("Something went wrong");
-        }
+        await collection.FindAsync(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
     }
 }

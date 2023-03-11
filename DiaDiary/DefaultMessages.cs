@@ -20,17 +20,14 @@ public class DefaultMessages
     {
         Console.WriteLine("Your log has been created successfully!");
     }
-    
     public static void Deleteion()
     {
         Console.WriteLine("Choose log you want to delete");
     }
-    
     public static void SuccessfulDeleteion()
     {
         Console.WriteLine("Your log has been deleted successfully!");
     }
-
     public static void ViewLogs()
     {
         Console.WriteLine("Here are your previous logs:");
@@ -39,5 +36,4 @@ public class DefaultMessages
     {
         Console.WriteLine("Ooops... Something went wrong :(");
     }
-    
 }
