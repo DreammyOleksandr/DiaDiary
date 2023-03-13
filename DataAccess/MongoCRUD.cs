@@ -3,18 +3,11 @@ using MongoDB.Driver;
 
 namespace DataAccess;
 
-public class MongoDbManager : ApplicationDbContext
-{ 
-    static readonly IMongoCollection<LogEntry> collection = _db.GetCollection<LogEntry>(collectionName);
-
+public class MongoCRUD : ApplicationDbContext
+{
     //Create
     public static async Task Create(LogEntry logEntry)
     {
-        foreach (var item in LogEntries)
-        {
-            Type variableType = item.GetType();
-            item = Convert
-        }
         await collection.InsertOneAsync(logEntry);
     }
     //Read

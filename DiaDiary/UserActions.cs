@@ -13,7 +13,7 @@ public class UserActions
         {
             case 'c':
                 DefaultMessages.Creation();
-                MongoDbManager.Create(new LogEntry()
+                MongoCRUD.Create(new LogEntry()
                 {
                     GlucoseLevel = Convert.ToDouble(Console.ReadLine()),
                     ShortTermInsulin = Convert.ToInt32(Console.ReadLine()),
@@ -24,13 +24,13 @@ public class UserActions
                 break;
             case 's':
                 DefaultMessages.ViewLogs();
-                MongoDbManager.GetAll();
+                MongoCRUD.GetAll();
                 break;
             case 'u':
                 break;
             case 'd':
                 DefaultMessages.Deleteion();
-                MongoDbManager.Delete();
+                MongoCRUD.Delete();
                 break;
         }
     }
