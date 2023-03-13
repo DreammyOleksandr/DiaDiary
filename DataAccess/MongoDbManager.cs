@@ -6,10 +6,15 @@ namespace DataAccess;
 public class MongoDbManager : ApplicationDbContext
 { 
     static readonly IMongoCollection<LogEntry> collection = _db.GetCollection<LogEntry>(collectionName);
-    private long couner = collection.CountDocuments(_=> true);
-    
+
+    //Create
     public static async Task Create(LogEntry logEntry)
     {
+        foreach (var item in LogEntries)
+        {
+            Type variableType = item.GetType();
+            item = Convert
+        }
         await collection.InsertOneAsync(logEntry);
     }
     //Read

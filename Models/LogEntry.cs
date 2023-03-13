@@ -1,13 +1,21 @@
+using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Driver;
 
 namespace Models;
 
+public class LogEntries : IEnumerable
+{
+    public IEnumerator GetEnumerator()
+    {
+        return new LogEntry();
+    }
+}
+
 public class LogEntry
 {
-    
+        
     [BsonId,BsonRepresentation(BsonType.ObjectId),Range(0, 50)]
     public string Id { get; set; }
     public double GlucoseLevel { get; set; }
