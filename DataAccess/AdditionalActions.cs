@@ -1,13 +1,28 @@
 using DataAccess;
 using Models;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace DiaDiary;
 
 public class AdditionalActions : ApplicationDbContext
 {
-    public static async Task AverageSugarLevel()
+    public static void GlycatedHemoglobin()
     {
-        List<double> glucoseLeveList = collection.Distinct<double>("glucose level", "").ToList();
+        
+        double avarageGlucoseLevel = 0;
+        double glucoseSum = 0;
+        long glucoseEntriesQuantity = collection.CountDocuments(_ => true);
+        
+        var filter = new BsonDocument();
+        List<double> glucoseLeveList = collection.Distinct<double>("GlucoseLevel", filter).ToList();
+        
+        foreach (var glucoseLevel in glucoseLeveList)
+        {
+            glucoseSum += glucoseLevel;
+        }
+
+        avarageGlucoseLevel = glucoseSum / glucoseEntriesQuantity;
+        Console.WriteLine(avarageGlucoseLevel);
     }
 }
