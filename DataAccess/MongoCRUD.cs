@@ -35,6 +35,14 @@ public class MongoCRUD : ApplicationDbContext
     {
         Console.WriteLine("Choose note which you want to delete by glucose level");
         string GlucoseEntrieToDelete = Console.ReadLine();
-        await collection.DeleteOneAsync(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
+        try
+        {
+            await collection.DeleteOneAsync(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
+            collection.FindAsync(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
     }
 }

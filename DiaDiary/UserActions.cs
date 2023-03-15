@@ -16,8 +16,8 @@ public class UserActions
                 MongoCRUD.Create(new LogEntry()
                 {
                     GlucoseLevel = Convert.ToDouble(Console.ReadLine()),
-                    ShortTermInsulin = Convert.ToInt32(Console.ReadLine()),
-                    LongTermInsulin = Convert.ToInt32(Console.ReadLine()),
+                    ShortTermInsulin = Convert.ToByte(Console.ReadLine()),
+                    LongTermInsulin = Convert.ToByte(Console.ReadLine()),
                     CarbsInBreadUnits = Convert.ToDouble(Console.ReadLine()),
                     Notes = Console.ReadLine(),
                 });
