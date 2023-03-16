@@ -1,7 +1,7 @@
 # DiaDiary
 Uni project. Presented to make diabetics lives easier
 
-DiaDiary is a console project which main purpose is to be a (surprise, surprise) diary for diabetics.
+DiaDiary is a console project which main purpose is to be a (surprise, surprise) diary for diabetics, where you can Create, Read, Update and Delete your logs.
 This project has an *interactive* fancy and understandable interface which is pretty unusual to see in console projects.
 
 MongoDB (noSQL) is the datasaver of this project, also it has additional functions, like showing you glycated hemoglobin (indeed, not precisely)
