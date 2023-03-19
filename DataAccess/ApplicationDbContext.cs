@@ -1,3 +1,4 @@
+
 using Models;
 using MongoDB.Driver;
 
@@ -6,10 +7,10 @@ namespace DataAccess;
 public class ApplicationDbContext
 {
     private const string DbName = "diabeticslogs";
-    protected const string collectionName = "LogEntries";
+    private const string CollectionName = "LogEntries";
     
-    private static readonly MongoClient _client = new MongoClient();
-    protected static IMongoDatabase _db = _client.GetDatabase(DbName);
-    protected static readonly IMongoCollection<LogEntry> collection = _db.GetCollection<LogEntry>(collectionName);
+    private static readonly MongoClient Client = new MongoClient();
+    private static IMongoDatabase Db = Client.GetDatabase(DbName);
+    protected static readonly IMongoCollection<LogEntry> collection = Db.GetCollection<LogEntry>(CollectionName);
 
 }
