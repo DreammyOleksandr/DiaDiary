@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Intrinsics.Arm;
 using static System.Console;
 
 namespace View;
@@ -7,7 +6,7 @@ namespace View;
 public class Menu
 {
     
-    private static string Title = @"  ____  _       ____  _                  
+    private static string _title = @"  ____  _       ____  _                  
  |  _ \(_) __ _|  _ \(_) __ _ _ __ _   _ 
  | | | | |/ _` | | | | |/ _` | '__| | | |
  | |_| | | (_| | |_| | | (_| | |  | |_| |
@@ -16,32 +15,32 @@ public class Menu
                                 by @dreammyoleksandr";
     
     
-    private static int SelectedIndex = 0;
-    private static string[] Options = new[] { "create", "show", "update", "delete", "additional"};
+    private static int _selectedIndex = 0;
+    private static string[] _options = new[] { "create", "show", "update", "delete", "additional", "about", "exit"};
 
-    private static string prefsufix;
+    private static string? _prefsufix;
 
     private static void DisplayOptions()
     {
-        Console.WriteLine(Title);
-        for (int i = 0; i < Options.Length; i++)
+        WriteLine(_title);
+        for (int i = 0; i < _options.Length; i++)
         {
-            string currentOption = Options[i];
+            string currentOption = _options[i];
 
-            if (i == SelectedIndex)
+            if (i == _selectedIndex)
             {
-                prefsufix = "--";
+                _prefsufix = "--";
                 ForegroundColor = ConsoleColor.White;
                 BackgroundColor = ConsoleColor.Black;
             }
             else
             {
-                prefsufix = "  ";
+                _prefsufix = "  ";
                 ForegroundColor = ConsoleColor.Black;
                 BackgroundColor = ConsoleColor.Gray;
             }
             
-            WriteLine($"{prefsufix}<< {currentOption} >>{prefsufix}");
+            WriteLine($"{_prefsufix}<< {currentOption} >>{_prefsufix}");
         }
     }
 
@@ -59,22 +58,22 @@ public class Menu
 
             if (keyPressed == ConsoleKey.UpArrow)
             {
-                SelectedIndex--;
-                if (SelectedIndex < 0)
+                _selectedIndex--;
+                if (_selectedIndex < 0)
                 {
-                    SelectedIndex = Options.Length - 1;
+                    _selectedIndex = _options.Length - 1;
                 }
             }
             if (keyPressed == ConsoleKey.DownArrow)
             {
-                SelectedIndex++;
-                if (SelectedIndex > Options.Length - 1)
+                _selectedIndex++;
+                if (_selectedIndex > _options.Length - 1)
                 {
-                    SelectedIndex = 0;
+                    _selectedIndex = 0;
                 }
             }
         } while (keyPressed != ConsoleKey.Enter );
 
-        return SelectedIndex;
+        return _selectedIndex;
     }
 }

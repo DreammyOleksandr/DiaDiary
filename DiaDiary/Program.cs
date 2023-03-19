@@ -9,9 +9,10 @@ class Program
 {
     static void Main(string[] args)
     {
-        // DefaultMessages.Welcome();
 
-        int selectedIndex = Menu.MenuRun();
+        ContextActions.About();
+        Console.ReadLine();
+        // int selectedIndex = Menu.MenuRun();
         // UserActions.ChooseAction();
         //
         // while (true)
