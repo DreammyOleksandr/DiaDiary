@@ -10,10 +10,10 @@ public class LogEntry
     [BsonId,BsonRepresentation(BsonType.ObjectId),Range(0, 50)]
     public string Id { get; set; } = null;
 
-    public double GlucoseLevel { get; set; } = 0;
-    [Range(0, 50)] public double CarbsInBreadUnits { get; set; } = 0;
-    public byte ShortTermInsulin { get; set; } = 0;
-    public byte LongTermInsulin { get; set; } = 0;
+    public double? GlucoseLevel { get; set; } = 0;
+    [Range(0, 50)] public double? CarbsInBreadUnits { get; set; } = 0;
+    public byte? ShortTermInsulin { get; set; } = 0;
+    public byte? LongTermInsulin { get; set; } = 0;
 
     public DateTime Date { get; set; } = DateTime.Today;
     public DateTime Time { get; set; } = DateTime.Now;

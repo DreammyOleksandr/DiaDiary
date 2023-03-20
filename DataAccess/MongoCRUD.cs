@@ -19,7 +19,7 @@ public class MongoCRUD : ApplicationDbContext
         Console.Write("Carbs eaten:");
         logEntry.CarbsInBreadUnits = double.Parse(Console.ReadLine());
         Console.WriteLine("Notes:");
-        logEntry.Notes = Console.ReadLine();
+        logEntry.Notes = Console.ReadLine() ?? "*There was no notes written*";
 
         await collection.InsertOneAsync(logEntry);
     }
