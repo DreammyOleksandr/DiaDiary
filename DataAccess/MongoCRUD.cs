@@ -9,6 +9,7 @@ public class MongoCRUD : ApplicationDbContext
     public static async Task Create()
     {
         LogEntry logEntry = new LogEntry();
+        double asf = 2;
         
         Console.Write("Glucose level:");
         logEntry.GlucoseLevel = double.Parse(Console.ReadLine());
