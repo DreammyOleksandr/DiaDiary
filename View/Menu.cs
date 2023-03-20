@@ -44,7 +44,7 @@ public class Menu
         }
     }
 
-    public static int MenuRun()
+    public static int Run()
     {
         ConsoleKey keyPressed;
 

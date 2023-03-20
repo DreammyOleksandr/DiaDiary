@@ -6,7 +6,7 @@ public class ContextActions
 {
     public static void Exit()
     {
-        
+        Environment.Exit(0);
     }
 
     public static void About()

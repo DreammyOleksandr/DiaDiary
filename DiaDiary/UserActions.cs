@@ -1,37 +1,56 @@
 using DataAccess;
 using Models;
+using View;
 
 namespace DiaDiary;
 
 public class UserActions
 {
     public static void ChooseAction()
-    {
-        char userChoice = Convert.ToChar(Console.ReadLine().ToLower());
-
-        switch (userChoice)
+    { 
+        Menu.Run();
+        int userChoice = Menu.Run();
+        Console.Clear();
+        
+        
+        switch ((OptionsEnum)userChoice)
         {
-            case 'c':
-                DefaultMessages.Creation();
-                MongoCRUD.Create(new LogEntry()
-                {
-                    GlucoseLevel = Convert.ToDouble(Console.ReadLine()),
-                    ShortTermInsulin = Convert.ToByte(Console.ReadLine()),
-                    LongTermInsulin = Convert.ToByte(Console.ReadLine()),
-                    CarbsInBreadUnits = Convert.ToDouble(Console.ReadLine()),
-                    Notes = Console.ReadLine(),
-                });
+            case OptionsEnum.Create:
+                MongoCRUD.Create();
                 break;
-            case 's':
-                DefaultMessages.ViewLogs();
+            case OptionsEnum.Read:
                 MongoCRUD.GetAll();
                 break;
-            case 'u':
+            case OptionsEnum.Update:
+                MongoCRUD.Update();
                 break;
-            case 'd':
-                DefaultMessages.Deleteion();
+            case OptionsEnum.Delete:
                 MongoCRUD.Delete();
                 break;
+            case OptionsEnum.Additional:
+                AdditionalActions.GlycatedHemoglobin();
+                break;
+            case OptionsEnum.About:
+                ContextActions.About();
+                break;
+            case OptionsEnum.Exit:
+                ContextActions.Exit();
+                break;
+        }
+        while (true)
+        {
+            Console.WriteLine("Do you want to continue?y/n");
+            char userRepeat = Char.Parse(Console.ReadLine().ToLower());
+            if (userRepeat == 'y')
+            {
+                Console.Clear();
+                UserActions.ChooseAction();
+            }
+            
+            if (userRepeat == 'n')
+            {
+                break;
+            }
         }
     }
 }

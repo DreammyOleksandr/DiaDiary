@@ -6,14 +6,27 @@ namespace DataAccess;
 public class MongoCRUD : ApplicationDbContext
 {
     //Create
-    public static async Task Create(LogEntry logEntry)
+    public static async Task Create()
     {
+        LogEntry logEntry = new LogEntry();
+        
+        Console.Write("Glucose level:");
+        logEntry.GlucoseLevel = double.Parse(Console.ReadLine());
+        Console.Write("Short term insulin injected:");
+        logEntry.ShortTermInsulin = byte.Parse(Console.ReadLine());
+        Console.Write("Long term insulin injected:");
+        logEntry.LongTermInsulin = byte.Parse(Console.ReadLine());
+        Console.Write("Carbs eaten:");
+        logEntry.CarbsInBreadUnits = double.Parse(Console.ReadLine());
+        Console.WriteLine("Notes:");
+        logEntry.Notes = Console.ReadLine();
+
         await collection.InsertOneAsync(logEntry);
     }
     //Read
-    public static async Task GetAll()
+    public static void GetAll()
     {
-        var entries = await collection.FindAsync(_ => true);
+        var entries = collection.Find(_ => true);
 
         foreach (var entry in entries.ToList())
         {
