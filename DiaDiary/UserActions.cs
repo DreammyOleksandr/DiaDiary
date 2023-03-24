@@ -16,16 +16,16 @@ public class UserActions
         switch ((OptionsEnum)userChoice)
         {
             case OptionsEnum.Create:
-                MongoCRUD.Create();
+                MongoCrud.Create();
                 break;
             case OptionsEnum.Read:
-                MongoCRUD.GetAll();
+                MongoCrud.GetAll();
                 break;
             case OptionsEnum.Update:
-                MongoCRUD.Update();
+                MongoCrud.Update();
                 break;
             case OptionsEnum.Delete:
-                MongoCRUD.Delete();
+                MongoCrud.Delete();
                 break;
             case OptionsEnum.Additional:
                 AdditionalActions.GlycatedHemoglobin();

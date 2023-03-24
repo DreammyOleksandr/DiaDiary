@@ -8,8 +8,6 @@ public class AdditionalActions : ApplicationDbContext
 {
     public static void GlycatedHemoglobin()
     {
-        
-        double avarageGlucoseLevel = 0;
         double glucoseSum = 0;
         long glucoseEntriesQuantity = collection.CountDocuments(_ => true);
         
@@ -21,7 +19,7 @@ public class AdditionalActions : ApplicationDbContext
             glucoseSum += glucoseLevel;
         }
 
-        avarageGlucoseLevel = glucoseSum / glucoseEntriesQuantity;
-        Console.WriteLine(avarageGlucoseLevel);
+        var averageGlucoseLevel = glucoseSum / glucoseEntriesQuantity;
+        Console.WriteLine(averageGlucoseLevel);
     }
 }

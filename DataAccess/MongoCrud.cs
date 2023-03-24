@@ -1,15 +1,17 @@
 ﻿using Models;
 using MongoDB.Driver;
+using DataAccess;
+using DataAccess.IDataAccess;
+
 
 namespace DataAccess;
 
-public class MongoCRUD : ApplicationDbContext
+public class MongoCrud : ApplicationDbContext, IMongoCrud
 {
     //Create
     public static async Task Create()
     {
         LogEntry logEntry = new LogEntry();
-        double asf = 2;
         
         Console.Write("Glucose level:");
         logEntry.GlucoseLevel = double.Parse(Console.ReadLine());
@@ -35,7 +37,8 @@ public class MongoCRUD : ApplicationDbContext
                               $"Glucose level: {entry.GlucoseLevel}\n" +
                               $"Short term insulin: {entry.ShortTermInsulin}\n" +
                               $"Long term insulin: {entry.LongTermInsulin}\n" +
-                              $"Carbs (Bread units): {entry.CarbsInBreadUnits}\n");
+                              $"Carbs (Bread units): {entry.CarbsInBreadUnits}\n" +
+                              $"{entry.Notes}\n\n");
             
         }
     }
