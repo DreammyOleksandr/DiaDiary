@@ -16,7 +16,7 @@ public class UserActions
         switch ((OptionsEnum)userChoice)
         {
             case OptionsEnum.Create:
-                MongoCrud.Create();
+                 MongoCrud.Create();
                 break;
             case OptionsEnum.Read:
                 MongoCrud.GetAll();
@@ -39,17 +39,11 @@ public class UserActions
         }
         while (true)
         {
-            Console.WriteLine("Do you want to continue?y/n");
-            char userRepeat = Char.Parse(Console.ReadLine().ToLower());
-            if (userRepeat == 'y')
+            Console.WriteLine("Press enter to go back to main menu");
+            ConsoleKey keyPressed = Console.ReadKey().Key;
+            if (keyPressed == ConsoleKey.Enter)
             {
-                Console.Clear();
                 UserActions.ChooseAction();
-            }
-            
-            if (userRepeat == 'n')
-            {
-                break;
             }
         }
     }

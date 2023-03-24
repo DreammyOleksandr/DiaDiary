@@ -30,14 +30,11 @@ public class Menu
             if (i == _selectedIndex)
             {
                 _prefsufix = "--";
-                ForegroundColor = ConsoleColor.White;
-                BackgroundColor = ConsoleColor.Black;
+                ForegroundColor = ConsoleColor.Green;
             }
             else
             {
                 _prefsufix = "  ";
-                ForegroundColor = ConsoleColor.Black;
-                BackgroundColor = ConsoleColor.Gray;
             }
             
             WriteLine($"{_prefsufix}<< {currentOption} >>{_prefsufix}");
