@@ -12,7 +12,7 @@ public class Menu
  | |_| | | (_| | |_| | | (_| | |  | |_| |
  |____/|_|\__,_|____/|_|\__,_|_|   \__, |
                                    |___/    
-                                by @dreammyoleksandr";
+                                by @DreammyOleksandr";
     
     
     private static int _selectedIndex = 0;

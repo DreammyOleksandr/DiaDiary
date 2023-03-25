@@ -1,7 +1,7 @@
 ﻿using Models;
 using MongoDB.Driver;
-using DataAccess;
 using DataAccess.IDataAccess;
+using MongoDB.Bson;
 
 
 namespace DataAccess;
@@ -45,7 +45,15 @@ public class MongoCrud : ApplicationDbContext, IMongoCrud
     //Update
     public static async Task Update()
     {
+        Console.WriteLine("Enter Glucose level to Update");
+        double glucoseToFind = double.Parse(Console.ReadLine());
+        var filter = new BsonDocument("GlucoseLevel", glucoseToFind);
+        
+        Console.WriteLine("Enter Glucose level to Update");
+        double updatedValue = double.Parse(Console.ReadLine());
+        var updated = new BsonDocument("$set", new BsonDocument("GlucoseLevel", updatedValue));
 
+        var result = await collection.UpdateOneAsync(filter, updated);
     }
     //Delete
     public static async Task Delete()

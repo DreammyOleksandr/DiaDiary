@@ -11,8 +11,7 @@ public class UserActions
         Menu.Run();
         int userChoice = Menu.Run();
         Console.Clear();
-        
-        
+
         switch ((OptionsEnum)userChoice)
         {
             case OptionsEnum.Create:
