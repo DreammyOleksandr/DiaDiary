@@ -65,7 +65,7 @@ public class MongoCrud : ApplicationDbContext, IMongoCrud
             await collection.DeleteOneAsync(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
             collection.FindAsync(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
         }
-        catch (Exception ex)
+        catch (MongoException ex)
         {
             throw ex;
         }
