@@ -26,6 +26,9 @@ public class UserActions
             case OptionsEnum.Delete:
                 MongoCrud.Delete();
                 break;
+            case OptionsEnum.DeleteAll:
+                MongoCrud.DropLogs();
+                break;
             case OptionsEnum.Additional:
                 AdditionalActions.GlycatedHemoglobin();
                 break;

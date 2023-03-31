@@ -70,4 +70,24 @@ public class MongoCrud : ApplicationDbContext, IMongoCrud
             throw ex;
         }
     }
+
+    public static async Task DropLogs()
+    {
+        
+        Console.WriteLine("This option will delete all your entries\n" +
+                          "Hit enter to continue/backspace to discard changes");
+        
+        ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+        ConsoleKey keyPressed = keyInfo.Key;
+
+        if (keyPressed == ConsoleKey.Enter)
+        {
+            await collection.DeleteManyAsync(_ => true);
+        }
+
+        if (keyPressed == ConsoleKey.Backspace)
+        {
+            
+        }
+    }
 }

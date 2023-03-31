@@ -10,7 +10,7 @@ public class ApplicationDbContext
     private const string CollectionName = "LogEntries";
     
     private static readonly MongoClient Client = new MongoClient();
-    private static IMongoDatabase Db = Client.GetDatabase(DbName);
+    protected static IMongoDatabase Db = Client.GetDatabase(DbName);
     protected static readonly IMongoCollection<LogEntry> collection = Db.GetCollection<LogEntry>(CollectionName);
 
 }

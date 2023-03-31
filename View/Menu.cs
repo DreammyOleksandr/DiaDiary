@@ -16,7 +16,7 @@ public class Menu
     
     
     private static int _selectedIndex = 0;
-    private static string[] _options = new[] { "create", "show", "update", "delete", "additional", "about", "exit"};
+    private static string[] _options = new[] { "create", "show", "update", "delete", "delete all", "additional", "about", "exit"};
 
     private static string? _prefsufix;
 
