@@ -70,13 +70,4 @@ public class MongoCrud : ApplicationDbContext, IMongoCrud
             throw ex;
         }
     }
-
-    public static LogEntry ReadLast()
-    {
-        var Last = collection.Find(_ => _.GlucoseLevel == 100);
-        foreach (var entry in Last)
-        {
-            
-        }
-    }
 }
