@@ -2,6 +2,6 @@
 	<s:String x:Key="/Default/CodeInspection/PencilsConfiguration/ActualSeverity/@EntryValue">SUGGESTION</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a93d124e_002D86cd_002D45b3_002Db89d_002Dbf45beac23f2/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CreatedIdEqualsInBaseId" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
-    &lt;TestId&gt;NUnit3x::97BEFB92-827B-4852-9E6F-97BA81917059::net7.0::DiaDiaryTests.Tests.InsertDocument_Success&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::97BEFB92-827B-4852-9E6F-97BA81917059::net7.0::DiaDiaryTests.Tests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
