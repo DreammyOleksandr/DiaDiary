@@ -8,8 +8,6 @@ public class DeleteMenu : Menu
    
    public static int RunMenu()
    {
-      Run(DeleteOptions);
-
       return Run(DeleteOptions);
    }
 }

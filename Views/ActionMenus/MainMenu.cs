@@ -43,17 +43,15 @@ public class MainMenu
 
     public static int Run()
     {
-        ConsoleKey keyPressed;
-
+        ConsoleKeyInfo keyInfo;
         do
         {
             Clear();
             DisplayOptions();
 
-            ConsoleKeyInfo keyInfo = ReadKey(true);
-            keyPressed = keyInfo.Key;
+            keyInfo = ReadKey(true);
 
-            if (keyPressed == ConsoleKey.UpArrow)
+            if (keyInfo.Key == ConsoleKey.UpArrow)
             {
                 _selectedIndex--;
                 if (_selectedIndex < 0)
@@ -61,7 +59,7 @@ public class MainMenu
                     _selectedIndex = _options.Length - 1;
                 }
             }
-            if (keyPressed == ConsoleKey.DownArrow)
+            if (keyInfo.Key == ConsoleKey.DownArrow)
             {
                 _selectedIndex++;
                 if (_selectedIndex > _options.Length - 1)
@@ -69,7 +67,7 @@ public class MainMenu
                     _selectedIndex = 0;
                 }
             }
-        } while (keyPressed != ConsoleKey.Enter );
+        } while (keyInfo.Key != ConsoleKey.Enter );
 
         return _selectedIndex;
     }

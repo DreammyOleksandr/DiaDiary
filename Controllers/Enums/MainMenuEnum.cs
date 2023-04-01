@@ -1,6 +1,6 @@
 namespace DataAccess;
 
-public enum OptionsEnum : int
+public enum MainMenuEnum
 {
     Create = 0,
     Read = 1,

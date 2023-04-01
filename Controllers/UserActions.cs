@@ -1,5 +1,4 @@
 using DataAccess;
-using Models;
 using View;
 using View.ActionMenus;
 
@@ -9,32 +8,39 @@ public class UserActions
 {
     public static void ChooseAction()
     { 
-        MainMenu.Run();
         int userChoice = MainMenu.Run();
         Console.Clear();
 
-        switch ((OptionsEnum)userChoice)
+        switch ((MainMenuEnum)userChoice)
         {
-            case OptionsEnum.Create:
-                 MongoCrud.Create();
+            case MainMenuEnum.Create:
+                MongoCrud.Create();
                 break;
-            case OptionsEnum.Read:
+            case MainMenuEnum.Read:
                 MongoCrud.GetAll();
                 break;
-            case OptionsEnum.Update:
+            case MainMenuEnum.Update:
                 MongoCrud.Update();
                 break;
-            case OptionsEnum.Delete:
-                DeleteMenu.RunMenu();
+            case MainMenuEnum.Delete:
                 int userDeleteChoice = DeleteMenu.RunMenu();
+                switch ((DeleteMenuEnum)userDeleteChoice)
+                {
+                    case DeleteMenuEnum.DeleteOne:
+                        MongoCrud.Delete();
+                        break;
+                    case DeleteMenuEnum.DeleteAll:
+                        MongoCrud.DropLogs();
+                        break;
+                }
                 break;
-            case OptionsEnum.Additional:
+            case MainMenuEnum.Additional:
                 AdditionalActions.GlycatedHemoglobin();
                 break;
-            case OptionsEnum.About:
+            case MainMenuEnum.About:
                 ContextActions.About();
                 break;
-            case OptionsEnum.Exit:
+            case MainMenuEnum.Exit:
                 ContextActions.Exit();
                 break;
         }
