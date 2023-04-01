@@ -6,8 +6,10 @@ public class DeleteMenu : Menu
 {
    private static string[] DeleteOptions = {"delete chosen log", "delete all logs"};
    
-   public static void RunMenu()
+   public static int RunMenu()
    {
       Run(DeleteOptions);
+
+      return Run(DeleteOptions);
    }
 }

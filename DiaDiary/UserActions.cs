@@ -1,6 +1,7 @@
 using DataAccess;
 using Models;
 using View;
+using View.ActionMenus;
 
 namespace DiaDiary;
 
@@ -24,7 +25,8 @@ public class UserActions
                 MongoCrud.Update();
                 break;
             case OptionsEnum.Delete:
-                MongoCrud.Delete();
+                DeleteMenu.RunMenu();
+                int userDeleteChoice = DeleteMenu.RunMenu();
                 break;
             case OptionsEnum.Additional:
                 AdditionalActions.GlycatedHemoglobin();

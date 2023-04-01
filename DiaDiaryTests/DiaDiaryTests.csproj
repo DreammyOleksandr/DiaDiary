@@ -20,7 +20,7 @@
       <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
       <ProjectReference Include="..\DiaDiary\DiaDiary.csproj" />
       <ProjectReference Include="..\Models\Models.csproj" />
-      <ProjectReference Include="..\View\View.csproj" />
+      <ProjectReference Include="..\Views\Views.csproj" />
     </ItemGroup>
 
 </Project>

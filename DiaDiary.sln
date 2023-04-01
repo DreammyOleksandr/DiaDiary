@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{8AD894B4-DD6B-4C23-85B6-F891BB5CC779}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "View\View.csproj", "{CE2F895F-E353-430C-A07E-B6B87A57AA6A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Views", "Views\Views.csproj", "{CE2F895F-E353-430C-A07E-B6B87A57AA6A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiaDiaryTests", "DiaDiaryTests\DiaDiaryTests.csproj", "{97BEFB92-827B-4852-9E6F-97BA81917059}"
 EndProject
