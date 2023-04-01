@@ -1,17 +1,28 @@
+﻿using System;
 using static System.Console;
 
 namespace View;
 
-public abstract class Menu
+public class MainMenu
 {
+    
+    private static string _title = @"  ____  _       ____  _                  
+ |  _ \(_) __ _|  _ \(_) __ _ _ __ _   _ 
+ | | | | |/ _` | | | | |/ _` | '__| | | |
+ | |_| | | (_| | |_| | | (_| | |  | |_| |
+ |____/|_|\__,_|____/|_|\__,_|_|   \__, |
+                                   |___/    
+                                by @DreammyOleksandr";
+    
+    
     private static int _selectedIndex = 0;
-    private static string? _prefsufix;
-    private static string[] _options;
+    private static string[] _options = new[] { "create", "show", "update", "delete", "additional", "about", "exit"};
 
-    private static void DisplayOptions(string[] options)
+    private static string? _prefsufix;
+
+    private static void DisplayOptions()
     {
-        _options = options;
-        
+        WriteLine(_title);
         for (int i = 0; i < _options.Length; i++)
         {
             string currentOption = _options[i];
@@ -29,14 +40,15 @@ public abstract class Menu
             WriteLine($"{_prefsufix}<< {currentOption} >>{_prefsufix}");
         }
     }
-    public static int Run(string[] options)
+
+    public static int Run()
     {
         ConsoleKey keyPressed;
 
         do
         {
             Clear();
-            DisplayOptions(options);
+            DisplayOptions();
 
             ConsoleKeyInfo keyInfo = ReadKey(true);
             keyPressed = keyInfo.Key;

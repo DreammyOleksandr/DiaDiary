@@ -8,8 +8,8 @@ public class UserActions
 {
     public static void ChooseAction()
     { 
-        Menu.Run();
-        int userChoice = Menu.Run();
+        MainMenu.Run();
+        int userChoice = MainMenu.Run();
         Console.Clear();
 
         switch ((OptionsEnum)userChoice)
@@ -25,9 +25,6 @@ public class UserActions
                 break;
             case OptionsEnum.Delete:
                 MongoCrud.Delete();
-                break;
-            case OptionsEnum.DeleteAll:
-                MongoCrud.DropLogs();
                 break;
             case OptionsEnum.Additional:
                 AdditionalActions.GlycatedHemoglobin();

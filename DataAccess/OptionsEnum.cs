@@ -6,8 +6,7 @@ public enum OptionsEnum : int
     Read = 1,
     Update = 2,
     Delete = 3,
-    DeleteAll = 4,
-    Additional = 5,
-    About = 6,
-    Exit = 7,
+    Additional = 4,
+    About = 5,
+    Exit = 6,
 }
