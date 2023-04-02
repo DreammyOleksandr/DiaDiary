@@ -1,4 +1,5 @@
 using DataAccess;
+using Models;
 using View;
 using View.ActionMenus;
 
@@ -14,23 +15,23 @@ public class UserActions
         switch ((MainMenuEnum)userChoice)
         {
             case MainMenuEnum.Create:
-                MongoCrud.Create();
+                MongoRepository<LogEntry>.Create();
                 break;
             case MainMenuEnum.Read:
-                MongoCrud.GetAll();
+                MongoRepository<LogEntry>.GetAll();
                 break;
             case MainMenuEnum.Update:
-                MongoCrud.Update();
+                MongoRepository<LogEntry>.Update();
                 break;
             case MainMenuEnum.Delete:
                 int userDeleteChoice = DeleteMenu.RunMenu();
                 switch ((DeleteMenuEnum)userDeleteChoice)
                 {
                     case DeleteMenuEnum.DeleteOne:
-                        MongoCrud.Delete();
+                        MongoRepository<LogEntry>.Delete();
                         break;
                     case DeleteMenuEnum.DeleteAll:
-                        MongoCrud.DropLogs();
+                        MongoRepository<LogEntry>.DeleteAll();
                         break;
                 }
                 break;

@@ -6,10 +6,18 @@ using MongoDB.Bson;
 
 namespace DataAccess;
 
-public class MongoCrud : ApplicationDbContext, IMongoCrud
+public class MongoRepository<T> : ApplicationDbContext, IMongoRepository<T> where T : class
 {
+    private readonly IMongoCollection<T> _collection;
+    
+    public MongoRepository(IMongoDatabase database)
+    {
+        _collection = database.GetCollection<T>(typeof(T).Name);
+    }
+    
+    
     //Create
-    public static async Task Create()
+    public async Task Create(T item)
     {
         LogEntry logEntry = new LogEntry();
         
@@ -24,7 +32,7 @@ public class MongoCrud : ApplicationDbContext, IMongoCrud
         Console.WriteLine("Notes:");
         logEntry.Notes = Console.ReadLine() ?? "*There was no notes written*";
 
-        await collection.InsertOneAsync(logEntry);
+        await _collection.InsertOneAsync(item);
     }
     //Read
     public static void GetAll()
@@ -60,18 +68,11 @@ public class MongoCrud : ApplicationDbContext, IMongoCrud
     {
         Console.WriteLine("Choose note which you want to delete by glucose level");
         string GlucoseEntrieToDelete = Console.ReadLine();
-        try
-        {
-            await collection.DeleteOneAsync(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
-            collection.FindAsync(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
-        }
-        catch (MongoException ex)
-        {
-            throw ex;
-        }
+        
+        await collection.DeleteOneAsync(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
     }
 
-    public static async Task DropLogs()
+    public static async Task DeleteAll()
     {
         
         Console.WriteLine("This option will delete all your entries\n" +
