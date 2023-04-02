@@ -35,7 +35,13 @@ public class UserActions
                 }
                 break;
             case MainMenuEnum.Additional:
-                AdditionalActions.GlycatedHemoglobin();
+                int userAdditionalChoice = AdditionalOptionsMenu.RunMenu();
+                switch ((AdditionalEnum)userAdditionalChoice)
+                {
+                    case AdditionalEnum.GlycatedHemoglobin: 
+                        AdditionalActions.GlycatedHemoglobin();
+                        break;
+                }
                 break;
             case MainMenuEnum.About:
                 ContextActions.About();
