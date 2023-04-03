@@ -42,7 +42,6 @@ public class UserActions
                 int userAdditionalChoice = AdditionalOptionsMenu.RunMenu();
                 switch ((AdditionalMenuEnum)userAdditionalChoice)
                 {
-                    case AdditionalMenuEnum.GlycatedHemoglobin: 
                         AdditionalActions.GlycatedHemoglobin();
                         break;
                 }
