@@ -8,30 +8,16 @@ namespace DataAccess;
 
 public class MongoRepository<T> : ApplicationDbContext, IMongoRepository<T> where T : class
 {
-    private readonly IMongoCollection<T> _collection;
+    private static IMongoCollection<T> _collection = Db.GetCollection<T>("LogEntries");
     
     public MongoRepository(IMongoDatabase database)
     {
-        _collection = database.GetCollection<T>(typeof(T).Name);
+        _collection = database.GetCollection<T>("LogEntries");
     }
     
-    
     //Create
-    public async Task Create(T item)
+    public static async Task Create(T item)
     {
-        LogEntry logEntry = new LogEntry();
-        
-        Console.Write("Glucose level:");
-        logEntry.GlucoseLevel = double.Parse(Console.ReadLine());
-        Console.Write("Short term insulin injected:");
-        logEntry.ShortTermInsulin = byte.Parse(Console.ReadLine());
-        Console.Write("Long term insulin injected:");
-        logEntry.LongTermInsulin = byte.Parse(Console.ReadLine());
-        Console.Write("Carbs eaten:");
-        logEntry.CarbsInBreadUnits = double.Parse(Console.ReadLine());
-        Console.WriteLine("Notes:");
-        logEntry.Notes = Console.ReadLine() ?? "*There was no notes written*";
-
         await _collection.InsertOneAsync(item);
     }
     //Read

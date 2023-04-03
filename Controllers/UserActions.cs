@@ -1,5 +1,6 @@
 using DataAccess;
 using Models;
+using MongoDB.Driver;
 using View;
 using View.ActionMenus;
 
@@ -7,15 +8,28 @@ namespace DiaDiary;
 
 public class UserActions
 {
+    private const string DbName = "diabeticslogs";
+    private const string CollectionName = "LogEntries";
+    
+    private static readonly MongoClient Client = new MongoClient();
+    protected static IMongoDatabase Db = Client.GetDatabase(DbName);
+    protected static readonly IMongoCollection<LogEntry> collection = Db.GetCollection<LogEntry>(CollectionName);
+    
     public static void ChooseAction()
-    { 
+    {
+
+
+        LogEntry logEntry = new LogEntry();
+        MongoRepository<LogEntry> Pon = new MongoRepository<LogEntry>(Db); 
+        
+        
         int userChoice = MainMenu.Run();
         Console.Clear();
 
         switch ((MainMenuEnum)userChoice)
         {
             case MainMenuEnum.Create:
-                MongoRepository<LogEntry>.Create();
+                MongoRepository<LogEntry>.Create(logEntry);
                 break;
             case MainMenuEnum.Read:
                 MongoRepository<LogEntry>.GetAll();
@@ -47,6 +61,7 @@ public class UserActions
         }
         while (true)
         {
+            float pf = 2;
             Console.WriteLine("Press enter to go back to main menu");
             ConsoleKey keyPressed = Console.ReadKey().Key;
             if (keyPressed == ConsoleKey.Enter)
