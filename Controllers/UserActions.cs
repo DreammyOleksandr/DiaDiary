@@ -1,4 +1,5 @@
 using DataAccess;
+using DataAccess.IDataAccess;
 using Models;
 using MongoDB.Driver;
 using View;
@@ -8,19 +9,20 @@ namespace DiaDiary;
 
 public class UserActions
 {
-    private const string DbName = "diabeticslogs";
-    private const string CollectionName = "LogEntries";
-    
-    private static readonly MongoClient Client = new MongoClient();
-    protected static IMongoDatabase Db = Client.GetDatabase(DbName);
-    protected static readonly IMongoCollection<LogEntry> collection = Db.GetCollection<LogEntry>(CollectionName);
-    
-    public static void ChooseAction()
+
+    public void ChooseAction(IMongoRepository<LogEntry> mongoRepository)
     {
 
 
-        LogEntry logEntry = new LogEntry();
-        MongoRepository<LogEntry> Pon = new MongoRepository<LogEntry>(Db); 
+        LogEntry logEntry = new LogEntry()
+        {
+            GlucoseLevel = 691,
+            ShortTermInsulin = 21,
+            LongTermInsulin = 32,
+            CarbsInBreadUnits = 12,
+            Notes = "dasfax"
+        };
+
         
         
         int userChoice = MainMenu.Run();
@@ -29,13 +31,13 @@ public class UserActions
         switch ((MainMenuEnum)userChoice)
         {
             case MainMenuEnum.Create:
-                MongoRepository<LogEntry>.Create(logEntry);
+                mongoRepository.Create(logEntry);
                 break;
             case MainMenuEnum.Read:
-                MongoRepository<LogEntry>.GetAll();
+                mongoRepository.GetAll();
                 break;
             case MainMenuEnum.Update:
-                MongoRepository<LogEntry>.Update();
+                mongoRepository.Update(logEntry);
                 break;
             case MainMenuEnum.Delete:
                 int userDeleteChoice = DeleteMenu.RunMenu();
@@ -66,7 +68,7 @@ public class UserActions
             ConsoleKey keyPressed = Console.ReadKey().Key;
             if (keyPressed == ConsoleKey.Enter)
             {
-                UserActions.ChooseAction();
+                ChooseAction(mongoRepository);
             }
         }
     }

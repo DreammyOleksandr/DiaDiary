@@ -16,24 +16,19 @@ public class MongoRepository<T> : ApplicationDbContext, IMongoRepository<T> wher
     }
     
     //Create
-    public static async Task Create(T item)
+    public async Task Create(T item)
     {
         await _collection.InsertOneAsync(item);
     }
     //Read
     public static void GetAll()
     {
-        var entries = collection.Find(_ => true);
+        var entries = _collection.Find(_ => true);
 
         foreach (var entry in entries.ToList())
         {
-            Console.WriteLine($"Time: {entry.Time:t}\n\n"+
-                              $"Glucose level: {entry.GlucoseLevel}\n" +
-                              $"Short term insulin: {entry.ShortTermInsulin}\n" +
-                              $"Long term insulin: {entry.LongTermInsulin}\n" +
-                              $"Carbs (Bread units): {entry.CarbsInBreadUnits}\n" +
-                              $"{entry.Notes}\n\n");
-            
+            Console.WriteLine(entry.ToBson());
+
         }
     }
     //Update

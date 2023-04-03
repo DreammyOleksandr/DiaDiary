@@ -2,10 +2,10 @@ namespace DataAccess.IDataAccess;
 
 public interface IMongoRepository<T>
 {
-      static async Task Create(){}
-      static void GetAll(){}
-      static async Task Update(){}
-      static async Task Delete(){}
-      static async Task DeleteAll(){}
+      async Task Create(T item){}
+      void GetAll(){}
+      async Task Update(T item){}
+      async Task Delete(){}
+      async Task DeleteAll(){}
 
 }
