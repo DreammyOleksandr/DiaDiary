@@ -16,10 +16,10 @@ public class UserActions
 
         LogEntry logEntry = new LogEntry()
         {
-            GlucoseLevel = 191,
-            ShortTermInsulin = 121,
-            LongTermInsulin = 132,
-            CarbsInBreadUnits = 12,
+            GlucoseLevel = 10,
+            ShortTermInsulin = 10,
+            LongTermInsulin = 10,
+            CarbsInBreadUnits = 10,
             Notes = "dasfax"
         };
 

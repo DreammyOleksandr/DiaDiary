@@ -47,7 +47,8 @@ public class MongoRepository<T> : IMongoRepository<T> where T : class
         Console.WriteLine("Choose note which you want to delete by glucose level");
         string GlucoseEntrieToDelete = Console.ReadLine();
         
-        //await _collection.DeleteOneAsync(p => p.GlucoseLevel.ToString() == GlucoseEntryToDelete);
+        var filter = Builders<T>.Filter.Eq("GlucoseLevel", GlucoseEntrieToDelete);
+        await _collection.DeleteOneAsync(filter);
     }
 
     public static async Task DeleteAll()
