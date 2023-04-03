@@ -40,10 +40,8 @@ public class UserActions
                 break;
             case MainMenuEnum.Additional:
                 int userAdditionalChoice = AdditionalOptionsMenu.RunMenu();
-                
                 switch ((AdditionalMenuEnum)userAdditionalChoice)
                 {
-                    case AdditionalMenuEnum.GlycatedHemoglobin:
                         AdditionalActions.GlycatedHemoglobin();
                         break;
                 }
