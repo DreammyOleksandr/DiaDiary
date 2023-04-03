@@ -13,25 +13,13 @@ public class UserActions
     public void ChooseAction(IMongoRepository<LogEntry> mongoRepository)
     {
 
-
-        LogEntry logEntry = new LogEntry()
-        {
-            GlucoseLevel = 10,
-            ShortTermInsulin = 10,
-            LongTermInsulin = 10,
-            CarbsInBreadUnits = 10,
-            Notes = "dasfax"
-        };
-
-        
-        
         int userChoice = MainMenu.Run();
         Console.Clear();
 
         switch ((MainMenuEnum)userChoice)
         {
             case MainMenuEnum.Create:
-                mongoRepository.Create(logEntry);
+                mongoRepository.Create();
                 break;
             case MainMenuEnum.Read:
                 mongoRepository.GetAll();

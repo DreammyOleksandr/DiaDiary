@@ -8,25 +8,44 @@ namespace DataAccess;
 
 public class MongoRepository<T> : IMongoRepository<T> where T : class
 {
-    private static IMongoCollection<T> _collection;
+    private static IMongoCollection<LogEntry> _collection;
     
     public MongoRepository(IMongoDatabase database)
     {
-        _collection = database.GetCollection<T>("LogEntries");
+        _collection = database.GetCollection<LogEntry>("LogEntries");
     }
     
     //Create
-    public async Task Create(T item)
+    public async Task Create()
     {
-        await _collection.InsertOneAsync(item);
+        LogEntry logEntry = new LogEntry();
+        
+        Console.Write("Glucose level:");
+        logEntry.GlucoseLevel = double.Parse(Console.ReadLine());
+        Console.Write("Short term insulin injected:");
+        logEntry.ShortTermInsulin = byte.Parse(Console.ReadLine());
+        Console.Write("Long term insulin injected:");
+        logEntry.LongTermInsulin = byte.Parse(Console.ReadLine());
+        Console.Write("Carbs eaten:");
+        logEntry.CarbsInBreadUnits = double.Parse(Console.ReadLine());
+        Console.WriteLine("Notes:");
+        logEntry.Notes = Console.ReadLine() ?? "*There was no notes written*";
+        await _collection.InsertOneAsync(logEntry);
     }
     //Read
-    public static void GetAll()
+    public void GetAll()
     {
-        var filter = _collection.CountDocuments("Glucose level");
-       
+        var entries = _collection.Find(_ => true);
 
-        Console.WriteLine(filter.CompareTo(1));
+        foreach (var entry in entries.ToList())
+        {
+            Console.WriteLine($"Time: {entry.Time:t}\n\n"+
+                              $"Glucose level: {entry.GlucoseLevel}\n" +
+                              $"Short term insulin: {entry.ShortTermInsulin}\n" +
+                              $"Long term insulin: {entry.LongTermInsulin}\n" +
+                              $"Carbs (Bread units): {entry.CarbsInBreadUnits}\n" +
+                              $"{entry.Notes}\n\n");
+        }
     }
     //Update
     public async Task Update()
@@ -47,7 +66,7 @@ public class MongoRepository<T> : IMongoRepository<T> where T : class
         Console.WriteLine("Choose note which you want to delete by glucose level");
         string GlucoseEntrieToDelete = Console.ReadLine();
         
-        var filter = Builders<T>.Filter.Eq("GlucoseLevel", GlucoseEntrieToDelete);
+        var filter = Builders<LogEntry>.Filter.Eq("GlucoseLevel", GlucoseEntrieToDelete);
         await _collection.DeleteOneAsync(filter);
     }
 
