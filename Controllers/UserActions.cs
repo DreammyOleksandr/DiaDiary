@@ -1,7 +1,6 @@
 using DataAccess;
 using DataAccess.IDataAccess;
 using Models;
-using MongoDB.Driver;
 using View;
 using View.ActionMenus;
 
@@ -40,7 +39,13 @@ public class UserActions
                 }
                 break;
             case MainMenuEnum.Additional:
-                AdditionalActions.GlycatedHemoglobin();
+                int userAdditionalChoice = AdditionalOptionsMenu.RunMenu();
+                switch ((AdditionalMenuEnum)userAdditionalChoice)
+                {
+                    case AdditionalMenuEnum.GlycatedHemoglobin: 
+                        AdditionalActions.GlycatedHemoglobin();
+                        break;
+                }
                 break;
             case MainMenuEnum.About:
                 ContextActions.About();
