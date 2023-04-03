@@ -1,8 +1,6 @@
-﻿using System.Security.Cryptography;
-using DataAccess;
+﻿using DataAccess;
 using Models;
 using MongoDB.Driver;
-using View;
 
 namespace DiaDiary;
 

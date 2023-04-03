@@ -16,9 +16,9 @@ public class UserActions
 
         LogEntry logEntry = new LogEntry()
         {
-            GlucoseLevel = 691,
-            ShortTermInsulin = 21,
-            LongTermInsulin = 32,
+            GlucoseLevel = 191,
+            ShortTermInsulin = 121,
+            LongTermInsulin = 132,
             CarbsInBreadUnits = 12,
             Notes = "dasfax"
         };
@@ -37,7 +37,7 @@ public class UserActions
                 mongoRepository.GetAll();
                 break;
             case MainMenuEnum.Update:
-                mongoRepository.Update(logEntry);
+                mongoRepository.Update();
                 break;
             case MainMenuEnum.Delete:
                 int userDeleteChoice = DeleteMenu.RunMenu();

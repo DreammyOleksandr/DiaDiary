@@ -6,9 +6,9 @@ using MongoDB.Bson;
 
 namespace DataAccess;
 
-public class MongoRepository<T> : ApplicationDbContext, IMongoRepository<T> where T : class
+public class MongoRepository<T> : IMongoRepository<T> where T : class
 {
-    private static IMongoCollection<T> _collection = Db.GetCollection<T>("LogEntries");
+    private static IMongoCollection<T> _collection;
     
     public MongoRepository(IMongoDatabase database)
     {
@@ -23,26 +23,23 @@ public class MongoRepository<T> : ApplicationDbContext, IMongoRepository<T> wher
     //Read
     public static void GetAll()
     {
-        var entries = _collection.Find(_ => true);
+        var filter = _collection.CountDocuments("Glucose level");
+       
 
-        foreach (var entry in entries.ToList())
-        {
-            Console.WriteLine(entry.ToBson());
-
-        }
+        Console.WriteLine(filter.CompareTo(1));
     }
     //Update
-    public static async Task Update()
+    public async Task Update()
     {
-        Console.WriteLine("Enter Glucose level to Update");
+        Console.WriteLine("Enter Glucose level of log you want to Update");
         double glucoseToFind = double.Parse(Console.ReadLine());
         var filter = new BsonDocument("GlucoseLevel", glucoseToFind);
         
-        Console.WriteLine("Enter Glucose level to Update");
+        Console.WriteLine("Enter new Glucose level");
         double updatedValue = double.Parse(Console.ReadLine());
         var updated = new BsonDocument("$set", new BsonDocument("GlucoseLevel", updatedValue));
 
-        var result = await collection.UpdateOneAsync(filter, updated);
+        var result = await _collection.UpdateOneAsync(filter, updated);
     }
     //Delete
     public static async Task Delete()
@@ -50,7 +47,7 @@ public class MongoRepository<T> : ApplicationDbContext, IMongoRepository<T> wher
         Console.WriteLine("Choose note which you want to delete by glucose level");
         string GlucoseEntrieToDelete = Console.ReadLine();
         
-        await collection.DeleteOneAsync(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
+        //await _collection.DeleteOneAsync(p => p.GlucoseLevel.ToString() == GlucoseEntryToDelete);
     }
 
     public static async Task DeleteAll()
@@ -64,7 +61,7 @@ public class MongoRepository<T> : ApplicationDbContext, IMongoRepository<T> wher
 
         if (keyPressed == ConsoleKey.Enter)
         {
-            await collection.DeleteManyAsync(_ => true);
+            await _collection.DeleteManyAsync(_ => true);
         }
 
         if (keyPressed == ConsoleKey.Backspace)

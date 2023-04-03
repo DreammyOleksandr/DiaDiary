@@ -4,7 +4,7 @@ public interface IMongoRepository<T>
 {
       async Task Create(T item){}
       void GetAll(){}
-      async Task Update(T item){}
+      async Task Update(){}
       async Task Delete(){}
       async Task DeleteAll(){}
 
