@@ -1,4 +1,6 @@
 using DataAccess;
+using DataAccess.IDataAccess;
+using Models;
 using View;
 using View.ActionMenus;
 
@@ -6,39 +8,42 @@ namespace DiaDiary;
 
 public class UserActions
 {
-    public static void ChooseAction()
-    { 
+
+    public void ChooseAction(IMongoRepository<LogEntry> mongoRepository)
+    {
+
         int userChoice = MainMenu.Run();
         Console.Clear();
 
         switch ((MainMenuEnum)userChoice)
         {
             case MainMenuEnum.Create:
-                MongoCrud.Create();
+                mongoRepository.Create();
                 break;
             case MainMenuEnum.Read:
-                MongoCrud.GetAll();
+                mongoRepository.GetAll();
                 break;
             case MainMenuEnum.Update:
-                MongoCrud.Update();
+                mongoRepository.Update();
                 break;
             case MainMenuEnum.Delete:
                 int userDeleteChoice = DeleteMenu.RunMenu();
                 switch ((DeleteMenuEnum)userDeleteChoice)
                 {
                     case DeleteMenuEnum.DeleteOne:
-                        MongoCrud.Delete();
+                        MongoRepository<LogEntry>.Delete();
                         break;
                     case DeleteMenuEnum.DeleteAll:
-                        MongoCrud.DropLogs();
+                        MongoRepository<LogEntry>.DeleteAll();
                         break;
                 }
                 break;
             case MainMenuEnum.Additional:
                 int userAdditionalChoice = AdditionalOptionsMenu.RunMenu();
-                switch ((AdditionalEnum)userAdditionalChoice)
+                
+                switch ((AdditionalMenuEnum)userAdditionalChoice)
                 {
-                    case AdditionalEnum.GlycatedHemoglobin: 
+                    case AdditionalMenuEnum.GlycatedHemoglobin:
                         AdditionalActions.GlycatedHemoglobin();
                         break;
                 }
@@ -52,11 +57,12 @@ public class UserActions
         }
         while (true)
         {
+            float pf = 2;
             Console.WriteLine("Press enter to go back to main menu");
             ConsoleKey keyPressed = Console.ReadKey().Key;
             if (keyPressed == ConsoleKey.Enter)
             {
-                UserActions.ChooseAction();
+                ChooseAction(mongoRepository);
             }
         }
     }

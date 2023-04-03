@@ -2,7 +2,7 @@ using static System.Console;
 
 namespace View;
 
-public abstract class Menu
+public abstract class ScrollableMenu
 {
     private static int _selectedIndex = 0;
     private static string? _prefsufix;

@@ -6,10 +6,17 @@ using MongoDB.Bson;
 
 namespace DataAccess;
 
-public class MongoCrud : ApplicationDbContext, IMongoCrud
+public class MongoRepository<T> : IMongoRepository<T> where T : class
 {
+    private static IMongoCollection<LogEntry> _collection;
+    
+    public MongoRepository(IMongoDatabase database)
+    {
+        _collection = database.GetCollection<LogEntry>("LogEntries");
+    }
+    
     //Create
-    public static async Task Create()
+    public async Task Create()
     {
         LogEntry logEntry = new LogEntry();
         
@@ -23,13 +30,12 @@ public class MongoCrud : ApplicationDbContext, IMongoCrud
         logEntry.CarbsInBreadUnits = double.Parse(Console.ReadLine());
         Console.WriteLine("Notes:");
         logEntry.Notes = Console.ReadLine() ?? "*There was no notes written*";
-
-        await collection.InsertOneAsync(logEntry);
+        await _collection.InsertOneAsync(logEntry);
     }
     //Read
-    public static void GetAll()
+    public void GetAll()
     {
-        var entries = collection.Find(_ => true);
+        var entries = _collection.Find(_ => true);
 
         foreach (var entry in entries.ToList())
         {
@@ -39,39 +45,32 @@ public class MongoCrud : ApplicationDbContext, IMongoCrud
                               $"Long term insulin: {entry.LongTermInsulin}\n" +
                               $"Carbs (Bread units): {entry.CarbsInBreadUnits}\n" +
                               $"{entry.Notes}\n\n");
-            
         }
     }
     //Update
-    public static async Task Update()
+    public async Task Update()
     {
-        Console.WriteLine("Enter Glucose level to Update");
+        Console.WriteLine("Enter Glucose level of log you want to Update");
         double glucoseToFind = double.Parse(Console.ReadLine());
         var filter = new BsonDocument("GlucoseLevel", glucoseToFind);
         
-        Console.WriteLine("Enter Glucose level to Update");
+        Console.WriteLine("Enter new Glucose level");
         double updatedValue = double.Parse(Console.ReadLine());
         var updated = new BsonDocument("$set", new BsonDocument("GlucoseLevel", updatedValue));
 
-        var result = await collection.UpdateOneAsync(filter, updated);
+        var result = await _collection.UpdateOneAsync(filter, updated);
     }
     //Delete
     public static async Task Delete()
     {
         Console.WriteLine("Choose note which you want to delete by glucose level");
         string GlucoseEntrieToDelete = Console.ReadLine();
-        try
-        {
-            await collection.DeleteOneAsync(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
-            collection.FindAsync(p => p.GlucoseLevel.ToString() == GlucoseEntrieToDelete);
-        }
-        catch (MongoException ex)
-        {
-            throw ex;
-        }
+        
+        var filter = Builders<LogEntry>.Filter.Eq("GlucoseLevel", GlucoseEntrieToDelete);
+        await _collection.DeleteOneAsync(filter);
     }
 
-    public static async Task DropLogs()
+    public static async Task DeleteAll()
     {
         
         Console.WriteLine("This option will delete all your entries\n" +
@@ -82,7 +81,7 @@ public class MongoCrud : ApplicationDbContext, IMongoCrud
 
         if (keyPressed == ConsoleKey.Enter)
         {
-            await collection.DeleteManyAsync(_ => true);
+            await _collection.DeleteManyAsync(_ => true);
         }
 
         if (keyPressed == ConsoleKey.Backspace)

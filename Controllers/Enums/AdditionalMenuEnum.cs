@@ -1,6 +1,6 @@
 namespace DataAccess;
 
-public enum AdditionalEnum
+public enum AdditionalMenuEnum
 {
     GlycatedHemoglobin = 0,
 }

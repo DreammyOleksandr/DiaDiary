@@ -2,7 +2,7 @@ using static  System.Console;
 
 namespace View.ActionMenus;
 
-public class DeleteMenu : Menu
+public class DeleteMenu : ScrollableMenu
 {
    private static string[] DeleteOptions = {"delete chosen log", "delete all logs"};
    

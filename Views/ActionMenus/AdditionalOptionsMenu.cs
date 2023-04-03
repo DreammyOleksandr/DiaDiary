@@ -1,6 +1,7 @@
 namespace View.ActionMenus;
 
-public class AdditionalOptionsMenu : Menu
+
+public class AdditionalOptionsMenu : ScrollableMenu
 {
     private static string[] AdditionalOptions = {"glycated hemoglobin",};
    
