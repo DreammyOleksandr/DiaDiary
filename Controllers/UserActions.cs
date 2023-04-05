@@ -1,8 +1,8 @@
+using Controllers.Validators;
 using DataAccess;
 using DataAccess.IDataAccess;
 using Models;
 using View;
-using View.ActionMenus;
 
 namespace DiaDiary;
 
@@ -27,24 +27,10 @@ public class UserActions
                 mongoRepository.Update();
                 break;
             case MainMenuEnum.Delete:
-                int userDeleteChoice = DeleteMenu.RunMenu();
-                switch ((DeleteMenuEnum)userDeleteChoice)
-                {
-                    case DeleteMenuEnum.DeleteOne:
-                        MongoRepository<LogEntry>.Delete();
-                        break;
-                    case DeleteMenuEnum.DeleteAll:
-                        MongoRepository<LogEntry>.DeleteAll();
-                        break;
-                }
+                DeleteActionsValidator.Validate();
                 break;
             case MainMenuEnum.Additional:
-                int userAdditionalChoice = AdditionalOptionsMenu.RunMenu();
-                switch ((AdditionalMenuEnum)userAdditionalChoice)
-                {
-                        AdditionalActions.GlycatedHemoglobin();
-                        break;
-                }
+                AdditionalActionsValidator.Validate();
                 break;
             case MainMenuEnum.About:
                 ContextActions.About();
@@ -55,7 +41,6 @@ public class UserActions
         }
         while (true)
         {
-            float pf = 2;
             Console.WriteLine("Press enter to go back to main menu");
             ConsoleKey keyPressed = Console.ReadKey().Key;
             if (keyPressed == ConsoleKey.Enter)
@@ -63,5 +48,6 @@ public class UserActions
                 ChooseAction(mongoRepository);
             }
         }
+        
     }
 }
