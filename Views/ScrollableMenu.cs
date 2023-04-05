@@ -7,9 +7,18 @@ public abstract class ScrollableMenu
     private static int _selectedIndex = 0;
     private static string? _prefsufix;
     private static string[] _options;
+    private static string _title = @"  ____  _       ____  _                  
+ |  _ \(_) __ _|  _ \(_) __ _ _ __ _   _ 
+ | | | | |/ _` | | | | |/ _` | '__| | | |
+ | |_| | | (_| | |_| | | (_| | |  | |_| |
+ |____/|_|\__,_|____/|_|\__,_|_|   \__, |
+                                   |___/    
+                                by @DreammyOleksandr";
 
     private static void DisplayOptions(string[] options)
     {
+        ForegroundColor = ConsoleColor.Green;
+        WriteLine(_title);
         _options = options;
         
         for (int i = 0; i < _options.Length; i++)
@@ -19,7 +28,6 @@ public abstract class ScrollableMenu
             if (i == _selectedIndex)
             {
                 _prefsufix = "--";
-                ForegroundColor = ConsoleColor.Green;
             }
             else
             {

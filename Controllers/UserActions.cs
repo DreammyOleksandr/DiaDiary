@@ -12,7 +12,7 @@ public class UserActions
     public void ChooseAction(IMongoRepository<LogEntry> mongoRepository)
     {
 
-        int userChoice = MainMenu.Run();
+        int userChoice = MainMenu.RunMenu();
         Console.Clear();
 
         switch ((MainMenuEnum)userChoice)
