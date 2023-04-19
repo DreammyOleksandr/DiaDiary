@@ -7,16 +7,15 @@ namespace DiaDiary;
 class Program
 {
     
-    private const string DbName = "diabeticslogs";
-    private const string CollectionName = "LogEntries";
+    const string DbName = "diabeticslogs";
     
-    private static readonly MongoClient Client = new MongoClient();
-    protected static IMongoDatabase Db = Client.GetDatabase(DbName);
+    static readonly MongoClient Client = new MongoClient();
+    static IMongoDatabase _db = Client.GetDatabase(DbName);
 
     static void Main()
     {
                 
-        MongoRepository<LogEntry> pon = new MongoRepository<LogEntry>(Db); 
+        MongoRepository<LogEntry> pon = new MongoRepository<LogEntry>(_db); 
         
         UserActions action = new UserActions();
         action.ChooseAction(pon);

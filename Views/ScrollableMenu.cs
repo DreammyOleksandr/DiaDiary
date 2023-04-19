@@ -4,9 +4,16 @@ namespace View;
 
 public abstract class ScrollableMenu
 {
+    public ScrollableMenu(string[] options, string title)
+    {
+        _options = options;
+        _title = title;
+    }
+
     private static int _selectedIndex = 0;
     private static string? _prefsufix;
     private static string[] _options;
+
     private static string _title = @"  ____  _       ____  _                  
  |  _ \(_) __ _|  _ \(_) __ _ _ __ _   _ 
  | | | | |/ _` | | | | |/ _` | '__| | | |
@@ -20,7 +27,7 @@ public abstract class ScrollableMenu
         ForegroundColor = ConsoleColor.Green;
         WriteLine(_title);
         _options = options;
-        
+
         for (int i = 0; i < _options.Length; i++)
         {
             string currentOption = _options[i];
@@ -33,11 +40,12 @@ public abstract class ScrollableMenu
             {
                 _prefsufix = "  ";
             }
-            
+
             WriteLine($"{_prefsufix}<< {currentOption} >>{_prefsufix}");
         }
     }
-    public static int Run(string[] options)
+
+    protected static int Run(string[] options)
     {
         ConsoleKey keyPressed;
 
@@ -57,6 +65,7 @@ public abstract class ScrollableMenu
                     _selectedIndex = _options.Length - 1;
                 }
             }
+
             if (keyPressed == ConsoleKey.DownArrow)
             {
                 _selectedIndex++;
@@ -65,7 +74,7 @@ public abstract class ScrollableMenu
                     _selectedIndex = 0;
                 }
             }
-        } while (keyPressed != ConsoleKey.Enter );
+        } while (keyPressed != ConsoleKey.Enter);
 
         return _selectedIndex;
     }
