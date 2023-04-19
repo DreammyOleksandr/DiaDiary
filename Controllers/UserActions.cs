@@ -11,8 +11,10 @@ public class UserActions
 
     public void ChooseAction(IMongoRepository<LogEntry> mongoRepository)
     {
-
-        int userChoice = MainMenu.RunMenu();
+        MenuElements menuElements = new MenuElements();
+        menuElements.options = new[] { "Create", "Read", "Update", "Delete", "Additional", "About", "Exit" };
+        ScrollableMenu scrollableMenu = new ScrollableMenu(menuElements);
+        int userChoice = ScrollableMenu.Run();
         Console.Clear();
 
         switch ((MainMenuEnum)userChoice)

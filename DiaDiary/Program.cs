@@ -14,7 +14,7 @@ class Program
 
     static void Main()
     {
-                
+        
         MongoRepository<LogEntry> pon = new MongoRepository<LogEntry>(_db); 
         
         UserActions action = new UserActions();

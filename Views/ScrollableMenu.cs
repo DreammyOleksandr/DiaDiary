@@ -2,25 +2,19 @@ using static System.Console;
 
 namespace View;
 
-public abstract class ScrollableMenu
+public class ScrollableMenu
 {
-    public ScrollableMenu(string[] options, string title)
+    public ScrollableMenu(MenuElements elements)
     {
-        _options = options;
-        _title = title;
+        _title = elements.title;
+        _options = elements.options;
     }
 
     private static int _selectedIndex = 0;
     private static string? _prefsufix;
     private static string[] _options;
 
-    private static string _title = @"  ____  _       ____  _                  
- |  _ \(_) __ _|  _ \(_) __ _ _ __ _   _ 
- | | | | |/ _` | | | | |/ _` | '__| | | |
- | |_| | | (_| | |_| | | (_| | |  | |_| |
- |____/|_|\__,_|____/|_|\__,_|_|   \__, |
-                                   |___/    
-                                by @DreammyOleksandr";
+    private static string? _title;
 
     private static void DisplayOptions(string[] options)
     {
@@ -45,14 +39,14 @@ public abstract class ScrollableMenu
         }
     }
 
-    protected static int Run(string[] options)
+    public static int Run()
     {
         ConsoleKey keyPressed;
 
         do
         {
             Clear();
-            DisplayOptions(options);
+            DisplayOptions(_options);
 
             ConsoleKeyInfo keyInfo = ReadKey(true);
             keyPressed = keyInfo.Key;
