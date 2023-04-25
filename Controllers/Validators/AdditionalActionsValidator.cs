@@ -6,14 +6,21 @@ namespace Controllers.Validators;
 
 public class AdditionalActionsValidator : IValidator
 {
+    
     public static void Validate()
     {
-        // int userAdditionalChoice = AdditionalOptionsMenu.RunMenu();
-        // switch ((AdditionalMenuEnum)userAdditionalChoice)
-        // {
-        //     case AdditionalMenuEnum.GlycatedHemoglobin:
-        //         AdditionalActions.GlycatedHemoglobin();
-        //         break;
-        // }
+        MenuElements menuElements = new MenuElements();
+        menuElements.options = new[] { "Glycated Hemoglobin" };
+        menuElements.title = null;
+        
+        ScrollableMenu scrollableMenu = new ScrollableMenu(menuElements);
+        
+        int userAdditionalChoice = ScrollableMenu.Run();
+        switch ((AdditionalMenuEnum)userAdditionalChoice)
+        {
+            case AdditionalMenuEnum.GlycatedHemoglobin:
+                AdditionalActions.GlycatedHemoglobin();
+                break;
+        }
     }
 }
