@@ -6,10 +6,10 @@ using View;
 
 namespace DiaDiary;
 
-public class UserActions
+public class UserInput
 {
 
-    public void ChooseAction(IMongoRepository<LogEntry> mongoRepository)
+    public void Run(IMongoRepository<LogEntry> mongoRepository)
     {
         MenuElements menuElements = new MenuElements();
         menuElements.options = new[] { "Create", "Read", "Update", "Delete", "Additional", "About", "Exit" };
@@ -47,7 +47,7 @@ public class UserActions
             ConsoleKey keyPressed = Console.ReadKey().Key;
             if (keyPressed == ConsoleKey.Enter)
             {
-                ChooseAction(mongoRepository);
+                Run(mongoRepository);
             }
         }
         

@@ -6,18 +6,14 @@ namespace DiaDiary;
 
 class Program
 {
-    
-    const string DbName = "diabeticslogs";
-    
-    static readonly MongoClient Client = new MongoClient();
-    static IMongoDatabase _db = Client.GetDatabase(DbName);
-
     static void Main()
     {
+        string dbName = "diabeticslogs";
+        MongoClient client = new MongoClient();
+        IMongoDatabase db = client.GetDatabase(dbName);
         
-        MongoRepository<LogEntry> pon = new MongoRepository<LogEntry>(_db); 
-        
-        UserActions action = new UserActions();
-        action.ChooseAction(pon);
+        MongoRepository<LogEntry> mongoRepository = new MongoRepository<LogEntry>(db);
+        UserInput userInput = new UserInput();
+        userInput.Run(mongoRepository);
     }
 }
