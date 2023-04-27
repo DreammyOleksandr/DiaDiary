@@ -28,7 +28,6 @@ public class MongoCrudTests
     [Test]
     public async Task InsertDocument_Success()
     {
-        // Arrange
         var document = new BsonDocument
         {
             { "GlucoseLevel", 100 },
@@ -46,7 +45,6 @@ public class MongoCrudTests
     [Test]
     public async Task UpdateDocument_Success()
     {
-        // Arrange
         var filter = Builders<BsonDocument>.Filter.Eq("GlucoseLevel", 100);
         var update = Builders<BsonDocument>.Update.Set("ShortTermInsulin", 40);
 
