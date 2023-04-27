@@ -1,14 +1,21 @@
 using DataAccess;
 using DiaDiary;
-using View.ActionMenus;
+using View;
 
 namespace Controllers.Validators;
 
 public class AdditionalActionsValidator : IValidator
 {
+    
     public static void Validate()
     {
-        int userAdditionalChoice = AdditionalOptionsMenu.RunMenu();
+        MenuElements menuElements = new MenuElements();
+        menuElements.options = new[] { "Glycated Hemoglobin" };
+        menuElements.title = null;
+        
+        ScrollableMenu scrollableMenu = new ScrollableMenu(menuElements);
+        
+        int userAdditionalChoice = ScrollableMenu.Run();
         switch ((AdditionalMenuEnum)userAdditionalChoice)
         {
             case AdditionalMenuEnum.GlycatedHemoglobin:

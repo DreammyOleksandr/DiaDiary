@@ -10,8 +10,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Views", "Views\Views.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiaDiaryTests", "DiaDiaryTests\DiaDiaryTests.csproj", "{97BEFB92-827B-4852-9E6F-97BA81917059}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controllers", "Controllers\Controllers.csproj", "{A52AA9D7-90ED-444A-8D3C-AA0D2EA00FA9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,9 +36,5 @@ Global
 		{97BEFB92-827B-4852-9E6F-97BA81917059}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97BEFB92-827B-4852-9E6F-97BA81917059}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97BEFB92-827B-4852-9E6F-97BA81917059}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A52AA9D7-90ED-444A-8D3C-AA0D2EA00FA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A52AA9D7-90ED-444A-8D3C-AA0D2EA00FA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A52AA9D7-90ED-444A-8D3C-AA0D2EA00FA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A52AA9D7-90ED-444A-8D3C-AA0D2EA00FA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
