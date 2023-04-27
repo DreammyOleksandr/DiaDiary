@@ -2,7 +2,7 @@ using static System.Console;
 
 namespace View;
 
-public class ScrollableMenu
+public struct ScrollableMenu
 {
     public ScrollableMenu(MenuElements elements)
     {
