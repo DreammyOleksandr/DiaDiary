@@ -20,7 +20,7 @@ public class DeleteActionsValidator : IValidator
         switch ((DeleteMenuEnum)userDeleteChoice)
         {
             case DeleteMenuEnum.DeleteOne:
-                MongoRepository<LogEntry>.Delete();
+                MongoRepository<LogEntry>.Delete(_=>_.Id!=null);
                 break;
             case DeleteMenuEnum.DeleteAll:
                 MongoRepository<LogEntry>.DeleteAll();
