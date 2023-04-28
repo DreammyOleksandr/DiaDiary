@@ -1,8 +1,7 @@
 ﻿using System.Linq.Expressions;
-using Models;
 using MongoDB.Driver;
 using DataAccess.IDataAccess;
-using MongoDB.Bson;
+using DiaDiary;
 
 
 namespace DataAccess;
@@ -39,9 +38,8 @@ public class MongoRepository<T> : IMongoRepository<T> where T : class
 
     public async Task DeleteAll()
     {
-        Console.WriteLine("This option will delete all your entries\n" +
-                          "Hit enter to continue/backspace to discard changes");
-
+        DefaultMessages.Warning();
+        
         ConsoleKeyInfo keyInfo = Console.ReadKey(true);
         ConsoleKey keyPressed = keyInfo.Key;
 

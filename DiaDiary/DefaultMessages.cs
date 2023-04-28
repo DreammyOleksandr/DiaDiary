@@ -31,4 +31,8 @@ public class DefaultMessages
     {
         Console.WriteLine("Ooops... Something went wrong :(");
     }
+    public static void Warning()
+    {
+        Console.WriteLine("Ooops... Something went wrong :(");
+    }
 }

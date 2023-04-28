@@ -1,6 +1,4 @@
-﻿using DataAccess;
-using Models;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 
 namespace DiaDiary;
 
@@ -11,8 +9,5 @@ class Program
         string dbName = "diabeticslogs";
         MongoClient client = new MongoClient();
         IMongoDatabase db = client.GetDatabase(dbName);
-        
-        MongoRepository<LogEntry> pon = new MongoRepository<LogEntry>(db);
-        
     }
 }
