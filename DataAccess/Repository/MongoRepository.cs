@@ -21,11 +21,6 @@ public class MongoRepository<T> : IMongoRepository<T> where T : class
     {
         await _collection.InsertOneAsync(entity);
     }
-    
-    public async Task Insert(T entity)
-    {
-        await _collection.InsertOneAsync(entity);
-    }
 
     public IEnumerable<T> GetAll()
     {

@@ -12,8 +12,7 @@ class Program
         MongoClient client = new MongoClient();
         IMongoDatabase db = client.GetDatabase(dbName);
         
-        MongoRepository<LogEntry> mongoRepository = new MongoRepository<LogEntry>(db);
-        UserInput userInput = new UserInput();
-        userInput.Run(mongoRepository);
+        MongoRepository<LogEntry> pon = new MongoRepository<LogEntry>(db);
+        
     }
 }

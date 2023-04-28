@@ -4,7 +4,7 @@ using View;
 
 namespace Controllers.Validators;
 
-public class AdditionalActionsValidator : IValidator
+public class AdditionalActionsValidator
 {
     
     public static void Validate()

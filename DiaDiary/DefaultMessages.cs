@@ -15,11 +15,11 @@ public class DefaultMessages
     {
         Console.WriteLine("Your log has been created successfully!");
     }
-    public static void Deleteion()
+    public static void Deletion()
     {
         Console.WriteLine("Choose log you want to delete by typing glucose level of log(experimental)");
     }
-    public static void SuccessfulDeleteion()
+    public static void SuccessfulDeletion()
     {
         Console.WriteLine("Your log has been deleted successfully!");
     }
