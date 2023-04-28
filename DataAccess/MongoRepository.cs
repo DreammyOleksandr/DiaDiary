@@ -17,31 +17,32 @@ public class MongoRepository<T> : IMongoRepository<T> where T : class
         _collection = database.GetCollection<T>(_collectionName);
     }
 
-    //Create
     public async Task Create(T entity)
     {
         await _collection.InsertOneAsync(entity);
     }
+    
+    public async Task Insert(T entity)
+    {
+        await _collection.InsertOneAsync(entity);
+    }
 
-    //Read
     public IEnumerable<T> GetAll()
     {
         return _collection.Find(_ => true).ToList();
     }
 
-    //Update
     public async Task FirstOrDefault(Expression<Func<T, bool>> filter, T entity)
     {
         await _collection.ReplaceOneAsync(filter, entity);
     }
 
-    //Delete
-    public static async Task Delete(Expression<Func<T, bool>> filter)
+    public async Task Delete(Expression<Func<T, bool>> filter)
     {
         await _collection.DeleteOneAsync(filter);
     }
 
-    public static async Task DeleteAll()
+    public async Task DeleteAll()
     {
         Console.WriteLine("This option will delete all your entries\n" +
                           "Hit enter to continue/backspace to discard changes");
@@ -58,10 +59,5 @@ public class MongoRepository<T> : IMongoRepository<T> where T : class
         {
             return;
         }
-    }
-    
-    public void Insert(T entity)
-    {
-        _collection.InsertOne(entity);
     }
 }
