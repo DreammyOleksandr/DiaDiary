@@ -1,6 +1,6 @@
 using static System.Console;
 using DataAccess;
-using Models;
+using DataAccess.Models;
 using MongoDB.Driver;
 
 namespace DiaDiary.Controllers;
