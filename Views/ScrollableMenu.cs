@@ -4,15 +4,15 @@ namespace View;
 
 public struct ScrollableMenu
 {
+    private static int _selectedIndex = 0;
+    private static string? _prefsufix;
+    private static string[] _options;
+
     public ScrollableMenu(MenuElements elements)
     {
         _title = elements.title;
         _options = elements.options;
     }
-
-    private static int _selectedIndex = 0;
-    private static string? _prefsufix;
-    private static string[] _options;
 
     private static string? _title;
 

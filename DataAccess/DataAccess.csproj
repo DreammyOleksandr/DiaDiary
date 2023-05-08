@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DiaDiary\DiaDiary.csproj" />
       <ProjectReference Include="..\Models\Models.csproj" />
       <ProjectReference Include="..\Views\Views.csproj" />
     </ItemGroup>

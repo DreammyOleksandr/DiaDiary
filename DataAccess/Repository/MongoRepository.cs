@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
 using MongoDB.Driver;
 using DataAccess.IDataAccess;
-using DiaDiary;
 
 
 namespace DataAccess;
@@ -38,7 +37,6 @@ public class MongoRepository<T> : IMongoRepository<T> where T : class
 
     public async Task DeleteAll()
     {
-        DefaultMessages.Warning();
         
         ConsoleKeyInfo keyInfo = Console.ReadKey(true);
         ConsoleKey keyPressed = keyInfo.Key;

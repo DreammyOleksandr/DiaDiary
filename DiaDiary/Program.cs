@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using DiaDiary.Controllers;
+using MongoDB.Driver;
 
 namespace DiaDiary;
 
@@ -9,5 +10,9 @@ class Program
         string dbName = "diabeticslogs";
         MongoClient client = new MongoClient();
         IMongoDatabase db = client.GetDatabase(dbName);
+
+        LogEntryController logEntryController = new LogEntryController(db);
+        
+        
     }
 }
