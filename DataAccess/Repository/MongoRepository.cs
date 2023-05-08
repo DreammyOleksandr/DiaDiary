@@ -7,12 +7,14 @@ namespace DataAccess;
 
 public class MongoRepository<T> : IMongoRepository<T> where T : class
 {
-    private readonly string _collectionName = "LogEntries";
+    private static MongoClient _mongoClient = new MongoClient();
+    private static IMongoDatabase _db;
     private static IMongoCollection<T> _collection;
 
-    public MongoRepository(IMongoDatabase database)
+    public MongoRepository(string databaseName, string collectionName)
     {
-        _collection = database.GetCollection<T>(_collectionName);
+        _db = _mongoClient.GetDatabase(databaseName);
+        _collection = _db.GetCollection<T>(collectionName);
     }
 
     public async Task Create(T entity)
