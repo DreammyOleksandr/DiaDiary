@@ -43,7 +43,11 @@ public class UserLogController
         List<UserLog> UserLogs = MongoRepository.GetAll().ToList();
         foreach (var userLog in UserLogs)
         {
-            
+            WriteLine($"Glucose level: {userLog.GlucoseLevel}\n" +
+                      $"Short term insulin injected: {userLog.ShortTermInsulin}\n" +
+                      $"Long term insulin injected: {userLog.LongTermInsulin}\n" +
+                      $"Carbs eaten: {userLog.CarbsInBreadUnits}\n" +
+                      $"Notes: {userLog.Notes}\n");
         }
     }
 
