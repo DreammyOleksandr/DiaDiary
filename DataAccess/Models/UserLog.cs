@@ -6,7 +6,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace DataAccess.Models;
 
-public class LogEntry
+public class UserLog
 {
     [BsonId, BsonRepresentation(BsonType.ObjectId)]
     public string Id { get; set; }
