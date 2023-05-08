@@ -14,7 +14,7 @@ public class MongoCrudTests
     public void SetUp()
     {
         _client = new MongoClient();
-        _database = _client.GetDatabase("diabeticslogs");
+        _database = _client.GetDatabase("DiaDiary");
         _collection = _database.GetCollection<BsonDocument>("LogEntriesTest");
     }
 
