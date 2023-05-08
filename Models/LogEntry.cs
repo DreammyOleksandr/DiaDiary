@@ -9,7 +9,7 @@ namespace Models;
 public class LogEntry
 {
     [BsonId, BsonRepresentation(BsonType.ObjectId)]
-    public string? Id { get; set; }
+    public string Id { get; set; }
 
     public double GlucoseLevel { get; set; }
     [Range(0, 50)] public double CarbsInBreadUnits { get; set; }
