@@ -17,9 +17,7 @@ public class UserLog
     [DisplayName("Stop")]
     public byte ShortTermInsulin { get; set; }
     public byte LongTermInsulin { get; set; }
-
-    public string MeasurementPeriod { get; set; }
-
+    
     public DateTime Date { get; set; } = DateTime.Today;
     public DateTime Time { get; set; } = DateTime.Now;
 
