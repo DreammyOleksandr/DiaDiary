@@ -22,4 +22,6 @@ public class UserLog
     public DateTime Time { get; set; } = DateTime.Now;
 
     [Range(0, 250)] public string? Notes { get; set; } 
+    
+    public ApplicationUser AssignedTo { get; set; }
 }
