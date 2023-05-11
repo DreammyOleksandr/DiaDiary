@@ -26,7 +26,7 @@ public class MongoCrudTests
     
     
     [Test]
-    public async Task InsertDocument_Success()
+    public async Task InsertDocumentSuccess()
     {
         var document = new BsonDocument
         {
@@ -43,7 +43,7 @@ public class MongoCrudTests
         Assert.IsNotNull(result);
     }
     [Test]
-    public async Task UpdateDocument_Success()
+    public async Task UpdateDocumentSuccess()
     {
         var filter = Builders<BsonDocument>.Filter.Eq("GlucoseLevel", 100);
         var update = Builders<BsonDocument>.Update.Set("ShortTermInsulin", 40);
@@ -62,7 +62,7 @@ public class MongoCrudTests
         Assert.AreEqual(1, result.ModifiedCount);
     }
     [Test]
-    public async Task DeleteDocument_Success()
+    public async Task DeleteDocumentSuccess()
     {
         var document = new BsonDocument
         {
