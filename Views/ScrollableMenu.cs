@@ -39,7 +39,7 @@ public struct ScrollableMenu
         }
     }
 
-    public static int Run()
+    public int Run()
     {
         ConsoleKey keyPressed;
 

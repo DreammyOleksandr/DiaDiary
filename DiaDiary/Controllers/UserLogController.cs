@@ -1,7 +1,7 @@
 using static System.Console;
 using DataAccess;
 using DataAccess.Models;
-using MongoDB.Driver;
+using View.Views;
 
 namespace DiaDiary.Controllers;
 
@@ -33,29 +33,20 @@ public class UserLogController
 
         await MongoRepository.Create(userLog);
     }
-
-    public void GetOne()
-    {
-    }
+    
 
     public void GetAll()
     {
         List<UserLog> UserLogs = MongoRepository.GetAll().ToList();
-        foreach (var userLog in UserLogs)
-        {
-            WriteLine($"Glucose level: {userLog.GlucoseLevel}\n" +
-                      $"Short term insulin injected: {userLog.ShortTermInsulin}\n" +
-                      $"Long term insulin injected: {userLog.LongTermInsulin}\n" +
-                      $"Carbs eaten: {userLog.CarbsInBreadUnits}\n" +
-                      $"Notes: {userLog.Notes}\n");
-        }
+        UserLogView.ShowAll(UserLogs);
     }
 
     public void Update()
     {
     }
 
-    public void Delete()
+    public async Task DeleteAll()
     {
+        await MongoRepository.DeleteAll();
     }
 }
