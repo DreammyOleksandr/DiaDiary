@@ -27,7 +27,7 @@ public class MongoRepository<T> : IMongoRepository<T> where T : class
         return _collection.Find(_ => true).ToList();
     }
 
-    public async Task FirstOrDefault(Expression<Func<T, bool>> filter, T entity)
+    public async Task Update(Expression<Func<T, bool>> filter, T entity)
     {
         await _collection.ReplaceOneAsync(filter, entity);
     }
