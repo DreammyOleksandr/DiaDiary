@@ -39,18 +39,6 @@ public class MongoRepository<T> : IMongoRepository<T> where T : class
 
     public async Task DeleteAll()
     {
-        
-        ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-        ConsoleKey keyPressed = keyInfo.Key;
-
-        if (keyPressed == ConsoleKey.Enter)
-        {
-            await _collection.DeleteManyAsync(_ => true);
-        }
-
-        if (keyPressed == ConsoleKey.Backspace)
-        {
-            return;
-        }
+        await _collection.DeleteManyAsync(_ => true);
     }
 }
