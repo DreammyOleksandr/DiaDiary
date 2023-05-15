@@ -31,7 +31,10 @@ public class UserLogView
         userLog.CarbsInBreadUnits = double.Parse(ReadLine());
         Write($"Notes: ");
         userLog.Notes = ReadLine();
-
+        
+        Write("\nPress any key to continue");
+        ReadKey();
+        
         return userLog;
     }
 
@@ -55,5 +58,13 @@ public class UserLogView
         UpdatedLog.Notes = ReadLine();
 
         return UpdatedLog;
+    }
+
+    public static string Delete()
+    {
+        Clear();
+        WriteLine("Enter Id of the log you want to delete: ");
+        string IdToDelete = ReadLine();
+        return IdToDelete;
     }
 }
