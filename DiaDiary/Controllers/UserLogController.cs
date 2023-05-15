@@ -12,7 +12,8 @@ public class UserLogController
 
     public UserLogController(string databaseName, string userLogCollectionName)
     {
-        MongoRepository = new MongoRepository<UserLog>(databaseName: databaseName, collectionName: userLogCollectionName);
+        MongoRepository =
+            new MongoRepository<UserLog>(databaseName: databaseName, collectionName: userLogCollectionName);
     }
 
 
@@ -22,7 +23,7 @@ public class UserLogController
         UserLogView.Create(userLog);
         await MongoRepository.Create(userLog);
     }
-    
+
     public void GetAll()
     {
         List<UserLog> UserLogs = MongoRepository.GetAll().ToList();
@@ -34,7 +35,13 @@ public class UserLogController
         WriteLine("Enter Id of log you want to replace");
         string? userLogId = Console.ReadLine();
         UserLog updatedUserLog = UserLogView.Update(userLogId);
-        await MongoRepository.Update(x => x.Id==userLogId, updatedUserLog);
+        await MongoRepository.Update(x => x.Id == userLogId, updatedUserLog);
+    }
+
+    public async Task Delete()
+    {
+        string IdToDelete = UserLogView.Delete();
+        await MongoRepository.Delete(x => x.Id == IdToDelete);
     }
 
     public async Task DeleteAll()
