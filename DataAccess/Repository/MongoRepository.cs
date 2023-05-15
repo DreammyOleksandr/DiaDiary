@@ -17,28 +17,18 @@ public class MongoRepository<T> : IMongoRepository<T> where T : class
         _collection = _db.GetCollection<T>(collectionName);
     }
 
-    public async Task Create(T entity)
-    {
+    public async Task Create(T entity) =>
         await _collection.InsertOneAsync(entity);
-    }
 
-    public IEnumerable<T> GetAll()
-    {
-        return _collection.Find(_ => true).ToList();
-    }
+    public IEnumerable<T> GetAll() =>
+        _collection.Find(_ => true).ToList();
 
-    public async Task Update(Expression<Func<T, bool>> filter, T entity)
-    {
+    public async Task Update(Expression<Func<T, bool>> filter, T entity) =>
         await _collection.ReplaceOneAsync(filter, entity);
-    }
 
-    public async Task Delete(Expression<Func<T, bool>> filter)
-    {
+    public async Task Delete(Expression<Func<T, bool>> filter) =>
         await _collection.DeleteOneAsync(filter);
-    }
 
-    public async Task DeleteAll()
-    {
+    public async Task DeleteAll() =>
         await _collection.DeleteManyAsync(_ => true);
-    }
 }
