@@ -1,6 +1,7 @@
 using static System.Console;
 using DataAccess;
 using DataAccess.Models;
+using MongoDB.Bson;
 using Views;
 
 namespace DiaDiary.Controllers;
@@ -22,16 +23,18 @@ public class UserLogController
         await MongoRepository.Create(userLog);
     }
     
-
     public void GetAll()
     {
         List<UserLog> UserLogs = MongoRepository.GetAll().ToList();
         UserLogView.ShowAll(UserLogs);
     }
 
-    public void Update()
+    public async Task Update()
     {
-        
+        WriteLine("Enter Id of log you want to replace");
+        string? userLogId = Console.ReadLine();
+        UserLog updatedUserLog = UserLogView.Update(userLogId);
+        await MongoRepository.Update(x => x.Id==userLogId, updatedUserLog);
     }
 
     public async Task DeleteAll()
