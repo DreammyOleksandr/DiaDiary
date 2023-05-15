@@ -1,7 +1,7 @@
 using static System.Console;
 using DataAccess;
 using DataAccess.Models;
-using View.Views;
+using Views;
 
 namespace DiaDiary.Controllers;
 
@@ -18,19 +18,7 @@ public class UserLogController
     public async Task Create()
     {
         UserLog userLog = new UserLog();
-
-        Write($"Glucose level: ");
-        userLog.GlucoseLevel = double.Parse(ReadLine());
-        Write($"S-term insulin: ");
-        userLog.ShortTermInsulin = byte.Parse(ReadLine());
-        Write($"L-term insulin: ");
-        userLog.LongTermInsulin = byte.Parse(ReadLine());
-        Write($"Carbs eaten: ");
-        userLog.CarbsInBreadUnits = double.Parse(ReadLine());
-        Write($"Notes: ");
-        userLog.Notes = ReadLine();
-
-
+        UserLogView.Create(userLog);
         await MongoRepository.Create(userLog);
     }
     
@@ -43,6 +31,7 @@ public class UserLogController
 
     public void Update()
     {
+        
     }
 
     public async Task DeleteAll()

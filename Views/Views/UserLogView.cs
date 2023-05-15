@@ -1,7 +1,7 @@
 using static System.Console;
 using DataAccess.Models;
 
-namespace View.Views;
+namespace Views;
 
 public class UserLogView
 {
@@ -15,5 +15,20 @@ public class UserLogView
                       $"Carbs eaten: {userLog.CarbsInBreadUnits}\n" +
                       $"Notes: {userLog.Notes}\n");
         }
+    }
+    public static UserLog Create(UserLog userLog)
+    {
+        Write($"Glucose level: ");
+        userLog.GlucoseLevel = double.Parse(ReadLine());
+        Write($"S-term insulin: ");
+        userLog.ShortTermInsulin = byte.Parse(ReadLine());
+        Write($"L-term insulin: ");
+        userLog.LongTermInsulin = byte.Parse(ReadLine());
+        Write($"Carbs eaten: ");
+        userLog.CarbsInBreadUnits = double.Parse(ReadLine());
+        Write($"Notes: ");
+        userLog.Notes = ReadLine();
+
+        return userLog;
     }
 }
