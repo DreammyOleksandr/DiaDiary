@@ -1,29 +1,35 @@
-﻿<Properties StartupConfiguration="{185338A3-F845-4DB7-94DC-A74A0F34F22F}|Default" GitUserInfo="UsingGIT">
-  <MonoDevelop.Ide.ItemProperties.DiaDiary PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="DiaDiary/Program.cs">
+﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{185338A3-F845-4DB7-94DC-A74A0F34F22F}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Views/MainMenuElementsEnum.cs">
     <Files>
-      <File FileName="DiaDiaryTests/MongoCrudTests.cs" />
-      <File FileName="DiaDiary/Program.cs" Line="24" Column="37" />
-      <File FileName="Views/MenuElements.cs" />
-      <File FileName="Views/ScrollableMenu.cs" />
+      <File FileName="Views/MainMenuElementsEnum.cs" Line="11" Column="9" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="DiaDiary" expanded="True">
-            <Node name="DiaDiary" expanded="True">
-              <Node name="Program.cs" selected="True" />
+            <Node name="DataAccess" expanded="True">
+              <Node name="Repository" expanded="True" />
             </Node>
-            <Node name="Views" expanded="True" />
+            <Node name="DiaDiary" expanded="True" />
+            <Node name="DiaDiaryTests" expanded="True" />
+            <Node name="Views" expanded="True">
+              <Node name="MainMenuElementsEnum.cs" selected="True" />
+            </Node>
           </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="DiaDiary" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.DiaDiary PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
 </Properties>
