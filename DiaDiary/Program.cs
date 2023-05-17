@@ -1,18 +1,50 @@
 ﻿using DiaDiary.Controllers;
 using MongoDB.Driver;
+using View;
 
-namespace DiaDiary;
+string dbName = "DiaDiary";
+string userLogsCollection = "UserLogs";
+MongoClient client = new MongoClient();
+IMongoDatabase db = client.GetDatabase(dbName);
 
-class Program
+UserLogController logEntryController = new UserLogController(dbName, userLogsCollection);
+
+MenuElements menuElements = new MenuElements()
 {
-    static void Main()
+    options = new string[]
     {
-        string dbName = "diabeticslogs";
-        MongoClient client = new MongoClient();
-        IMongoDatabase db = client.GetDatabase(dbName);
+        "Create", "Read", "Update", "Delete", "Delete All"
+    }
+};
 
-        LogEntryController logEntryController = new LogEntryController(db);
-        
-        
+
+while (true)
+{
+    ScrollableMenu scrollableMenu = new ScrollableMenu(menuElements);
+    int chosenAction = scrollableMenu.Run();
+    if (chosenAction == 0)
+    {
+        await logEntryController.Create();
+    }
+
+    if (chosenAction == 1)
+    {
+        logEntryController.GetAll();
+        Console.ReadKey();
+    }
+
+    if (chosenAction == 2)
+    {
+        await logEntryController.Update();
+    }
+
+    if (chosenAction == 3)
+    {
+        await logEntryController.Delete();
+    }
+
+    if (chosenAction == 4)
+    {
+        await logEntryController.DeleteAll();
     }
 }
