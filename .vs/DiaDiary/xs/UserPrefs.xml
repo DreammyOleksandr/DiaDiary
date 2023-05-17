@@ -1,12 +1,12 @@
 ﻿<Properties StartupConfiguration="{185338A3-F845-4DB7-94DC-A74A0F34F22F}|Default" GitUserInfo="UsingGIT">
+  <MonoDevelop.Ide.ItemProperties.DiaDiary PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="DiaDiary/Program.cs">
     <Files>
       <File FileName="DiaDiaryTests/MongoCrudTests.cs" />
       <File FileName="DiaDiary/Program.cs" Line="24" Column="37" />
-      <File FileName="Views/MenuElements.cs" Line="1" Column="1" />
-      <File FileName="Views/ScrollableMenu.cs" Line="3" Column="16" />
+      <File FileName="Views/MenuElements.cs" />
+      <File FileName="Views/ScrollableMenu.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -24,6 +24,6 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.DiaDiary PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>
