@@ -1,8 +1,13 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{185338A3-F845-4DB7-94DC-A74A0F34F22F}|Default">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Views/MainMenuElementsEnum.cs">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Views/MenuEnums/MainMenuElementsEnum.cs">
     <Files>
-      <File FileName="Views/MainMenuElementsEnum.cs" Line="11" Column="9" />
+      <File FileName="Views/MainMenuElementsEnum.cs" Line="14" Column="2" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -14,7 +19,9 @@
             <Node name="DiaDiary" expanded="True" />
             <Node name="DiaDiaryTests" expanded="True" />
             <Node name="Views" expanded="True">
-              <Node name="MainMenuElementsEnum.cs" selected="True" />
+              <Node name="MenuEnums" expanded="True">
+                <Node name="MainMenuElementsEnum.cs" selected="True" />
+              </Node>
             </Node>
           </Node>
         </State>
@@ -27,9 +34,4 @@
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.DiaDiary PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MultiItemStartupConfigurations />
 </Properties>

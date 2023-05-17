@@ -1,5 +1,5 @@
 ﻿using System;
-namespace View
+namespace View.Enums
 {
 	public enum MainMenuElementsEnum : byte
 	{
