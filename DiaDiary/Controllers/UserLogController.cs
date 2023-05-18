@@ -10,10 +10,10 @@ public class UserLogController
 {
     private readonly MongoRepository<UserLog> MongoRepository;
 
-    public UserLogController(string databaseName, string userLogCollectionName)
+    public UserLogController(string database, string userLogCollection)
     {
         MongoRepository =
-            new MongoRepository<UserLog>(databaseName: databaseName, collectionName: userLogCollectionName);
+            new MongoRepository<UserLog>(databaseName: database, collectionName: userLogCollection);
     }
 
 
