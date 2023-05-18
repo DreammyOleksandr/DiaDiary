@@ -1,6 +1,7 @@
 ﻿using DiaDiary.Controllers;
 using MongoDB.Driver;
 using View;
+using View.Enums;
 
 string dbName = "DiaDiary";
 string userLogsCollection = "UserLogs";
@@ -13,7 +14,7 @@ MenuElements menuElements = new MenuElements()
 {
     options = new string[]
     {
-        "Create", "Read", "Update", "Delete", "Delete All"
+        "Create", "Read", "Update", "Delete", "About", "Exit",
     }
 };
 
@@ -22,29 +23,27 @@ while (true)
 {
     ScrollableMenu scrollableMenu = new ScrollableMenu(menuElements);
     int chosenAction = scrollableMenu.Run();
-    if (chosenAction == 0)
-    {
-        await logEntryController.Create();
-    }
 
-    if (chosenAction == 1)
+    switch ((MainMenuElement)chosenAction)
     {
-        logEntryController.GetAll();
-        Console.ReadKey();
-    }
-
-    if (chosenAction == 2)
-    {
-        await logEntryController.Update();
-    }
-
-    if (chosenAction == 3)
-    {
-        await logEntryController.Delete();
-    }
-
-    if (chosenAction == 4)
-    {
-        await logEntryController.DeleteAll();
+        case MainMenuElement.Create:
+            await logEntryController.Create();
+            break;
+        case MainMenuElement.Read:
+            logEntryController.GetAll();
+            break;
+        case MainMenuElement.Update:
+            await logEntryController.Update();
+            break;
+        case MainMenuElement.Delete:
+            await logEntryController.Delete();
+            break;
+        case MainMenuElement.About:
+            Console.Clear();
+            ContextActions.About();
+            break;
+        case MainMenuElement.Exit:
+            ContextActions.Exit();
+            break;
     }
 }
