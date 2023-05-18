@@ -16,6 +16,8 @@ public class ContextActions
                   +"Create, Read, Update and Delete your logs. This project has an interactive fancy and understandable interface which is pretty unusual to see in console projects.\n\n"
                   +"MongoDB (noSQL) is the datasaver of this project, also it has additional functions, like showing you glycated hemoglobin (indeed, not precisely)\n\n"
                   +"Still much work to do, so follow the updates, if you're interested :D\n\n"
-                  +"email: albom2004q@gmail.com \ninstagram: @dreammy_oleksandr \nyoutube: @bananagiornogiovanna7094\n\n");
+                  +"email: albom2004q@gmail.com \ninstagram: @dreammy_oleksandr \nyoutube: @bananagiornogiovanna7094\n\n" +
+                  "Press any key to continue...");
+        ReadKey();
     }
 }
