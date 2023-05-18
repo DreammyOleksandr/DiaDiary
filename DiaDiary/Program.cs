@@ -6,7 +6,10 @@ using View.Enums;
 string dbName = "DiaDiary";
 string userLogsCollection = "UserLogs";
 MongoClient client = new MongoClient();
-IMongoDatabase db = client.GetDatabase(dbName);
+
+
+
+
 
 UserLogController logEntryController = new UserLogController(dbName, userLogsCollection);
 
