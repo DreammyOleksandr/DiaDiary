@@ -1,7 +1,6 @@
 using static System.Console;
 using DataAccess;
 using DataAccess.Models;
-using MongoDB.Bson;
 using Views;
 
 namespace DiaDiary.Controllers;
