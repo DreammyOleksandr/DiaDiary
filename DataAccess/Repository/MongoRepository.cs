@@ -21,8 +21,11 @@ public class MongoRepository<T> : IMongoRepository<T> where T : class
         await _collection.InsertOneAsync(entity);
 
     public IEnumerable<T> GetAll() =>
-        _collection.Find(_ => true).ToList();
-
+         _collection.Find(_ => true).ToList();
+    
+    public async Task GetOne(Expression<Func<T, bool>> filter) =>
+        await _collection.Find(filter).FirstOrDefaultAsync();
+    
     public async Task Update(Expression<Func<T, bool>> filter, T entity) =>
         await _collection.ReplaceOneAsync(filter, entity);
 
