@@ -32,6 +32,7 @@ public class UserLogController
 
     public async Task Update()
     {
+        Clear();
         WriteLine("Enter Id of log you want to replace");
         string? userLogId = Console.ReadLine();
         UserLog updatedUserLog = UserLogView.Update(userLogId);

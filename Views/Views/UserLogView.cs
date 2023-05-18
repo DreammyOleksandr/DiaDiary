@@ -17,6 +17,10 @@ public class UserLogView
                       $"Carbs eaten: {userLog.CarbsInBreadUnits}\n" +
                       $"Notes: {userLog.Notes}\n");
         }
+        
+        WriteLine("Press any key to continue...");
+        ReadKey();
+
     }
     public static UserLog Create(UserLog userLog)
     {
@@ -32,7 +36,7 @@ public class UserLogView
         Write($"Notes: ");
         userLog.Notes = ReadLine();
         
-        Write("\nPress any key to continue");
+        Write("\nPress any key to continue...");
         ReadKey();
         
         return userLog;
@@ -44,7 +48,7 @@ public class UserLogView
         UserLog UpdatedLog = new UserLog();
         UpdatedLog.Id = userLogId;
         
-        WriteLine("Enter Id of the log that you want to update: ");
+        WriteLine("Enter new info: \n");
         
         Write($"Glucose level: ");
         UpdatedLog.GlucoseLevel = double.Parse(ReadLine());
