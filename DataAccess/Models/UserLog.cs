@@ -1,5 +1,3 @@
-using System.Collections;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
@@ -14,7 +12,6 @@ public class UserLog
     public double GlucoseLevel { get; set; }
     [Range(0, 50)] public double CarbsInBreadUnits { get; set; }
     
-    [DisplayName("Stop")]
     public byte ShortTermInsulin { get; set; }
     public byte LongTermInsulin { get; set; }
     
