@@ -5,7 +5,7 @@ namespace Views;
 
 public class ApplicationUserView
 {
-    public static ApplicationUser Register(ApplicationUser applicationUser)
+    public static ApplicationUser SignIn(ApplicationUser applicationUser)
     {
         Clear();
         Write($"Em@il: ");

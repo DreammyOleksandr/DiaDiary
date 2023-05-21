@@ -2,6 +2,8 @@ using System.Security.Cryptography;
 using System.Text;
 using DataAccess;
 using DataAccess.Models;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using Views;
 
 namespace DiaDiary.Controllers;
@@ -23,25 +25,39 @@ public class ApplicationUserController
 
         var userToFind = MongoRepository.GetOne(_ => _.Email == applicationUser.Email).Result;
 
-        if (userToFind != null && PasswordHash(applicationUser.Password) == userToFind.Password)
+        if (userToFind == null)
+        {
+            Console.Clear();
+            Messages.EmailError();
+            return;
+        }
+
+        if (userToFind.Email != null && PasswordHash(applicationUser.Password) == userToFind.Password)
         {
             Console.Clear();
             Messages.SuccessfulLogin();
         }
         else
         {
-            Console.WriteLine("No");
+            Console.Clear();
+            Messages.PasswordError();
         }
     }
 
-    public async Task Register()
+    public async Task SignIn()
     {
         ApplicationUser registeredUser = new ApplicationUser();
-        ApplicationUserView.Register(registeredUser);
+        ApplicationUserView.SignIn(registeredUser);
 
         string hashedPassword = PasswordHash(registeredUser.Password);
         registeredUser.Password = hashedPassword;
-        
+
+        bool uniqueEmail = CheckEmailOnUniqueness(registeredUser.Email);
+        if (uniqueEmail)
+        {
+            Messages.
+        }
+
         await MongoRepository.Create(registeredUser);
     }
 
@@ -52,5 +68,20 @@ public class ApplicationUserController
         var hashedPassword = hash.ComputeHash(passwordInBytes);
 
         return Convert.ToHexString(hashedPassword);
+    }
+
+    private bool CheckEmailOnUniqueness(string createdEmail)
+    {
+        List<ApplicationUser> applicationUsers = MongoRepository.GetAll().ToList();
+
+        foreach (var applicationUser in applicationUsers)
+        {
+            if (createdEmail == applicationUser.Email)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
