@@ -34,6 +34,7 @@ public class ApplicationUserController
         {
             Console.Clear();
             Messages.SuccessfulLogin();
+            
         }
         else
         {
@@ -57,9 +58,7 @@ public class ApplicationUserController
             await MongoRepository.Create(registeredUser);
         }
         else
-        {
             Messages.NotUniqueEmail();
-        }
     }
 
     private string PasswordHash(string password)
@@ -73,7 +72,7 @@ public class ApplicationUserController
 
     private bool CheckEmailOnUniqueness(string createdEmail)
     {
-        var dataBaseEmail = MongoRepository.GetOne(_ => _.Email == createdEmail);
+        var dataBaseEmail = MongoRepository.GetOne(_ => _.Email == createdEmail).Result;
 
         if (dataBaseEmail == null)
         {
