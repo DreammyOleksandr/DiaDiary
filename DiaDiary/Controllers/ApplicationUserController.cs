@@ -18,18 +18,31 @@ public class ApplicationUserController
 
     public async Task Login()
     {
-        
+        ApplicationUser applicationUser = new ApplicationUser();
+        ApplicationUserView.Login(applicationUser);
+
+        var userToFind = MongoRepository.GetOne(_ => _.Email == applicationUser.Email).Result;
+
+        if (userToFind != null && PasswordHash(applicationUser.Password) == userToFind.Password)
+        {
+            Console.Clear();
+            Messages.SuccessfulLogin();
+        }
+        else
+        {
+            Console.WriteLine("No");
+        }
     }
 
     public async Task Register()
     {
-        ApplicationUser applicationUser = new ApplicationUser();
-        ApplicationUserView.Register(applicationUser);
+        ApplicationUser registeredUser = new ApplicationUser();
+        ApplicationUserView.Register(registeredUser);
 
-        string hashedPassword = PasswordHash(applicationUser.Password);
-        applicationUser.Password = hashedPassword;
+        string hashedPassword = PasswordHash(registeredUser.Password);
+        registeredUser.Password = hashedPassword;
         
-        await MongoRepository.Create(applicationUser);
+        await MongoRepository.Create(registeredUser);
     }
 
     private string PasswordHash(string password)
@@ -38,6 +51,6 @@ public class ApplicationUserController
         var passwordInBytes = Encoding.Default.GetBytes(password);
         var hashedPassword = hash.ComputeHash(passwordInBytes);
 
-        return Convert.ToString(hashedPassword);
+        return Convert.ToHexString(hashedPassword);
     }
 }
