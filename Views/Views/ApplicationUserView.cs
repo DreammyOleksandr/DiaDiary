@@ -17,7 +17,18 @@ public class ApplicationUserView
 
         Write("\nPress any key to continue...");
         ReadKey();
-        
+
+        return applicationUser;
+    }
+
+    public static ApplicationUser Login(ApplicationUser applicationUser)
+    {
+        Clear();
+        Write($"Em@il: ");
+        applicationUser.Email = ReadLine();
+        Write($"Password: ");
+        applicationUser.Password = ReadLine();
+
         return applicationUser;
     }
 }
