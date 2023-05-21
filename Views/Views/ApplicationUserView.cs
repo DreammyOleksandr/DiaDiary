@@ -25,7 +25,7 @@ public class ApplicationUserView
     {
         Clear();
         Write($"Em@il: ");
-        applicationUser.Email = ReadLine();
+        applicationUser.Email = ReadLine().ToLower();
         Write($"Password: ");
         applicationUser.Password = ReadLine();
 
