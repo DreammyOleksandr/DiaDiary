@@ -9,15 +9,13 @@ public class ApplicationUserView
     {
         Clear();
         Write($"Em@il: ");
-        applicationUser.Email = ReadLine();
+        applicationUser.Email = ReadLine().ToLower();
         Write($"Password: ");
         applicationUser.Password = ReadLine();
         Write($"Full name: ");
         applicationUser.FullName = ReadLine();
-
-        Write("\nPress any key to continue...");
-        ReadKey();
-
+        WriteLine();
+        
         return applicationUser;
     }
 
