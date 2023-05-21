@@ -2,8 +2,6 @@ using System.Security.Cryptography;
 using System.Text;
 using DataAccess;
 using DataAccess.Models;
-using MongoDB.Bson;
-using MongoDB.Driver;
 using Views;
 
 namespace DiaDiary.Controllers;
@@ -55,10 +53,13 @@ public class ApplicationUserController
         bool uniqueEmail = CheckEmailOnUniqueness(registeredUser.Email);
         if (uniqueEmail)
         {
-            Messages.
+            Messages.SuccessfulSignin();
+            await MongoRepository.Create(registeredUser);
         }
-
-        await MongoRepository.Create(registeredUser);
+        else
+        {
+            Messages.NotUniqueEmail();
+        }
     }
 
     private string PasswordHash(string password)
@@ -72,16 +73,15 @@ public class ApplicationUserController
 
     private bool CheckEmailOnUniqueness(string createdEmail)
     {
-        List<ApplicationUser> applicationUsers = MongoRepository.GetAll().ToList();
+        var dataBaseEmail = MongoRepository.GetOne(_ => _.Email == createdEmail);
 
-        foreach (var applicationUser in applicationUsers)
+        if (dataBaseEmail == null)
         {
-            if (createdEmail == applicationUser.Email)
-            {
-                return false;
-            }
+            return true;
         }
-
-        return true;
+        else
+        {
+            return false;
+        }
     }
 }
