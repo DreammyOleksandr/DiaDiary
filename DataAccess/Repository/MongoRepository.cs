@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
 using MongoDB.Driver;
 using DataAccess.IDataAccess;
-using MongoDB.Bson;
 
 
 namespace DataAccess;
@@ -21,14 +20,11 @@ public class MongoRepository<T> : IMongoRepository<T> where T : class
     public async Task Create(T entity) =>
         await _collection.InsertOneAsync(entity);
 
-    public IEnumerable<T> GetAll() =>
-         _collection.Find(_ => true).ToList();
-    
-    public IEnumerable<T> GetRange(Expression<Func<T, bool>> filter) =>
-         _collection.Find(filter).ToList();
+    public async Task<List<T>> GetAll() =>
+        await _collection.Find(_ => true).ToListAsync();
 
     public async Task<T> GetOne(Expression<Func<T, bool>> filter) =>
-         await _collection.Find(filter).FirstOrDefaultAsync();
+        await _collection.Find(filter).FirstOrDefaultAsync();
 
     public async Task Update(Expression<Func<T, bool>> filter, T entity) =>
         await _collection.ReplaceOneAsync(filter, entity);
