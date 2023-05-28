@@ -20,8 +20,8 @@ public class MongoRepository<T> : IMongoRepository<T> where T : class
     public async Task Create(T entity) =>
         await _collection.InsertOneAsync(entity);
 
-    public async Task<List<T>> GetAll() =>
-        await _collection.Find(_ => true).ToListAsync();
+    public async Task<List<T>> GetRange(Expression<Func<T, bool>> filter) =>
+        await _collection.Find(filter).ToListAsync();
 
     public async Task<T> GetOne(Expression<Func<T, bool>> filter) =>
         await _collection.Find(filter).FirstOrDefaultAsync();
