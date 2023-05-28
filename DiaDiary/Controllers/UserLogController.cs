@@ -16,25 +16,28 @@ public class UserLogController
     }
 
 
-    public async Task Create()
+    public async Task Create(ApplicationUser applicationUser)
     {
         UserLog userLog = new UserLog();
         UserLogView.Create(userLog);
+        userLog.AssignedTo = applicationUser;
         await MongoRepository.Create(userLog);
     }
 
-    public void GetAll()
+    public async Task GetAll()
     {
-        List<UserLog> UserLogs = MongoRepository.GetAll().ToList();
+        List<UserLog> UserLogs = await MongoRepository.GetAll();
         UserLogView.ShowAll(UserLogs);
     }
 
-    public async Task Update()
+    public async Task Update(ApplicationUser applicationUser)
     {
         Clear();
         WriteLine("Enter Id of log you want to replace");
         string? userLogId = Console.ReadLine();
         UserLog updatedUserLog = UserLogView.Update(userLogId);
+        updatedUserLog.AssignedTo = applicationUser;
+
         await MongoRepository.Update(x => x.Id == userLogId, updatedUserLog);
     }
 
