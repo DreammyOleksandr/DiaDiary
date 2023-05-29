@@ -1,68 +1,56 @@
-﻿using DiaDiary.Controllers;
+﻿using DataAccess;
+using DataAccess.Models;
+using DiaDiary;
+using DiaDiary.Controllers;
 using View;
-using View.Enums;
-
-string dbName = "DiaDiary";
-string userLogsCollection = "ApplicationUsers";
 
 
-ApplicationUserController applicationUserController = new ApplicationUserController(dbName, userLogsCollection);
+MongoRepository<ApplicationUser> mongoRepositoryForAppUser =
+    new MongoRepository<ApplicationUser>(DbStrings.DbName, DbStrings.ApplicationUsersCollection);
+
+ApplicationUser applicationUser = new();
+ApplicationUserController applicationUserController = new ApplicationUserController(mongoRepositoryForAppUser);
 
 MenuElements menuElements = new MenuElements()
 {
     options = new string[]
     {
-        "Login", "Registration", "Exit"
+        "LogIn", "SignIn", "Exit"
     }
 };
 
-while (true)
+
+while (applicationUser.Email == null)
 {
     ScrollableMenu scrollableMenu = new ScrollableMenu(menuElements);
     int chosenAction = scrollableMenu.Run();
 
-    switch ((AuthorizationEnum)chosenAction)
+    dynamic GetPosition(int chosenAction) => chosenAction switch
     {
-        case AuthorizationEnum.Login:
-            await applicationUserController.Login();
-            break;
-        case AuthorizationEnum.Registration:
-            await applicationUserController.Register();
-            break;
-        case AuthorizationEnum.Exit:
-            ContextActions.Exit();
-            break;
-    }
+        0 => applicationUserController.Login(applicationUser),
+        1 => applicationUserController.SignIn(applicationUser),
+        2 => ContextActions.Exit(),
+    };
+
+    dynamic execution = GetPosition(chosenAction);
 }
 
+MongoRepository<UserLog> mongoRepository = new MongoRepository<UserLog>(DbStrings.DbName, DbStrings.UserLogsCollection);
 
-//
-//
-// while (true)
-// {
-//     ScrollableMenu scrollableMenu = new ScrollableMenu(menuElements);
-//     int chosenAction = scrollableMenu.Run();
-//
-//     switch ((MainMenuElement)chosenAction)
-//     {
-//         case MainMenuElement.Create:
-//             await logEntryController.Create();
-//             break;
-//         case MainMenuElement.Read:
-//             logEntryController.GetAll();
-//             break;
-//         case MainMenuElement.Update:
-//             await logEntryController.Update();
-//             break;
-//         case MainMenuElement.Delete:
-//             await logEntryController.Delete();
-//             break;
-//         case MainMenuElement.About:
-//             Console.Clear();
-//             ContextActions.About();
-//             break;
-//         case MainMenuElement.Exit:
-//             ContextActions.Exit();
-//             break;
-//     }
-// }
+UserLogController userLogController = new(mongoRepository, applicationUser);
+
+while (true)
+{
+    menuElements = new MenuElements()
+    {
+        options = new string[]
+        {
+            "Create", "Read", "Update", "Delete", "Delete All", "About", "Exit"
+        }
+    };
+    ScrollableMenu scrollableMenu = new ScrollableMenu(menuElements);
+    int chosenAction = scrollableMenu.Run();
+
+
+    dynamic execution = userLogController.UserAction(chosenAction);
+}
