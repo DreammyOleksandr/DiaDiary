@@ -19,8 +19,6 @@ public class UserLogView
         }
         
         WriteLine("Press any key to continue...");
-        ReadKey();
-
     }
     public static UserLog Create(UserLog userLog)
     {
@@ -60,6 +58,9 @@ public class UserLogView
         UpdatedLog.CarbsInBreadUnits = double.Parse(ReadLine());
         Write($"Notes: ");
         UpdatedLog.Notes = ReadLine();
+        
+        Write("\nPress any key to continue...");
+        ReadKey();
 
         return UpdatedLog;
     }
