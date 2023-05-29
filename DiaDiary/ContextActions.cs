@@ -4,12 +4,13 @@ namespace View;
 
 public class ContextActions
 {
-    public static void Exit()
+    public static object Exit()
     {
         Environment.Exit(0);
+        return 0;
     }
 
-    public static void About()
+    public static object About()
     {
         WriteLine("Uni project. Presented to make diabetics lives easier\n\n"
                   +"DiaDiary is a console project which main purpose is to be a (surprise, surprise) diary for diabetics, where you can "
@@ -19,5 +20,6 @@ public class ContextActions
                   +"email: albom2004q@gmail.com \ninstagram: @dreammy_oleksandr \nyoutube: @bananagiornogiovanna7094\n\n" +
                   "Press any key to continue...");
         ReadKey();
+        return null;
     }
 }
