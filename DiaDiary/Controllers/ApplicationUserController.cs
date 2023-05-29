@@ -8,19 +8,19 @@ namespace DiaDiary.Controllers;
 
 public class ApplicationUserController
 {
-    private readonly MongoRepository<ApplicationUser> MongoRepository;
+    private readonly MongoRepository<ApplicationUser> _mongoRepository;
 
-    public ApplicationUserController(string database, string applicationUserCollection)
+    public ApplicationUserController(MongoRepository<ApplicationUser> mongoRepository)
     {
-        MongoRepository =
-            new MongoRepository<ApplicationUser>(databaseName: database, collectionName: applicationUserCollection);
+        _mongoRepository = mongoRepository;
     }
+    
 
     public ApplicationUser Login(ApplicationUser applicationUserToLogin)
     {
         ApplicationUserView.Login(applicationUserToLogin);
 
-        var userToFind = MongoRepository.GetOne(_ => _.Email == applicationUserToLogin.Email).Result;
+        var userToFind = _mongoRepository.GetOne(_ => _.Email == applicationUserToLogin.Email).Result;
 
         if (userToFind == null)
         {
@@ -56,7 +56,7 @@ public class ApplicationUserController
         if (uniqueEmail)
         {
             Messages.SuccessfulSignin();
-            await MongoRepository.Create(registeredUser);
+            await _mongoRepository.Create(registeredUser);
             return registeredUser;
         }
         else{
@@ -77,7 +77,7 @@ public class ApplicationUserController
 
     private bool CheckEmailOnUniqueness(string createdEmail)
     {
-        var dataBaseEmail = MongoRepository.GetOne(_ => _.Email == createdEmail).Result;
+        var dataBaseEmail = _mongoRepository.GetOne(_ => _.Email == createdEmail).Result;
         return dataBaseEmail == null ? true : false;
     }
 }
