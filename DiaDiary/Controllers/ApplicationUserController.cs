@@ -2,6 +2,7 @@ using System.Security.Cryptography;
 using System.Text;
 using DataAccess;
 using DataAccess.Models;
+using View;
 using Views;
 
 namespace DiaDiary.Controllers;
@@ -9,14 +10,23 @@ namespace DiaDiary.Controllers;
 public class ApplicationUserController
 {
     private readonly MongoRepository<ApplicationUser> _mongoRepository;
+    private readonly ApplicationUser _applicationUser;
 
-    public ApplicationUserController(MongoRepository<ApplicationUser> mongoRepository)
+    public ApplicationUserController(MongoRepository<ApplicationUser> mongoRepository, ApplicationUser applicationUser)
     {
         _mongoRepository = mongoRepository;
+        _applicationUser = applicationUser;
     }
     
+    public dynamic UserAction(int chosenAction) => chosenAction switch
+    {
+        0 => Login(_applicationUser),
+        1 => SignIn(_applicationUser),
+        2 => ContextActions.Exit(),
+    };
 
-    public ApplicationUser Login(ApplicationUser applicationUserToLogin)
+    
+    private ApplicationUser Login(ApplicationUser applicationUserToLogin)
     {
         ApplicationUserView.Login(applicationUserToLogin);
 
@@ -45,7 +55,7 @@ public class ApplicationUserController
         }
     }
 
-    public async Task<ApplicationUser> SignIn(ApplicationUser registeredUser)
+    private async Task<ApplicationUser> SignIn(ApplicationUser registeredUser)
     {
         ApplicationUserView.SignIn(registeredUser);
 
