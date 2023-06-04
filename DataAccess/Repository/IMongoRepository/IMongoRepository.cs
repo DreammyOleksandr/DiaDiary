@@ -9,5 +9,5 @@ public interface IMongoRepository<T>
     Task<List<T>> GetRange(Expression<Func<T, bool>> filter);
     Task Update(Expression<Func<T, bool>> filter, T entity);
     Task Delete(Expression<Func<T, bool>> filter);
-    Task DeleteAll();
+    Task DeleteRange(Expression<Func<T, bool>> filter);
 }

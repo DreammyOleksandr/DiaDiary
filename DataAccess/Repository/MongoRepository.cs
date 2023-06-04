@@ -32,6 +32,6 @@ public class MongoRepository<T> : IMongoRepository<T> where T : class
     public async Task Delete(Expression<Func<T, bool>> filter) =>
         await _collection.DeleteOneAsync(filter);
 
-    public async Task DeleteAll() =>
-        await _collection.DeleteManyAsync(_ => true);
+    public async Task DeleteRange(Expression<Func<T, bool>> filter) =>
+        await _collection.DeleteManyAsync(filter);
 }
