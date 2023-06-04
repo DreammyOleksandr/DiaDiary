@@ -9,6 +9,14 @@ namespace DiaDiary.Controllers;
 
 public class ApplicationUserController
 {
+    public readonly MenuElements menuElements = new MenuElements()
+    {
+        options = new string[]
+        {
+            "LogIn", "SignIn", "Exit"
+        }
+    };
+
     private readonly MongoRepository<ApplicationUser> _mongoRepository;
     private readonly ApplicationUser _applicationUser;
 
@@ -17,15 +25,15 @@ public class ApplicationUserController
         _mongoRepository = mongoRepository;
         _applicationUser = applicationUser;
     }
-    
-    public dynamic UserAction(int chosenAction) => chosenAction switch
+
+    public dynamic ActionsRouting(int chosenAction) => chosenAction switch
     {
         0 => Login(_applicationUser),
         1 => SignIn(_applicationUser),
         2 => ContextActions.Exit(),
     };
 
-    
+
     private ApplicationUser Login(ApplicationUser applicationUserToLogin)
     {
         ApplicationUserView.Login(applicationUserToLogin);
@@ -69,7 +77,8 @@ public class ApplicationUserController
             await _mongoRepository.Create(registeredUser);
             return registeredUser;
         }
-        else{
+        else
+        {
             Messages.NotUniqueEmail();
             registeredUser.Email = null;
             return registeredUser;
