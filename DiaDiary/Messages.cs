@@ -9,17 +9,19 @@ public class Messages
         WriteLine("Press any key to continue...");
         ReadKey();
     }
+
     private static void AnyKeyToReturn()
     {
         WriteLine("Press any key to return...");
         ReadKey();
     }
-    
+
     public static void SuccessfulLogin()
     {
         WriteLine("Login was successful!");
         AnyKeyToContinue();
     }
+
     public static void SuccessfulSignin()
     {
         WriteLine("SignIn was successful!");
@@ -46,7 +48,13 @@ public class Messages
 
     public static void LogNotFound()
     {
-        WriteLine("There is no such log to delete");
+        WriteLine("There is no such log");
+        AnyKeyToReturn();
+    }
+
+    public static void SuccessfulDeletion()
+    {
+        WriteLine("Log has been deleted successfully");
         AnyKeyToReturn();
     }
 }
