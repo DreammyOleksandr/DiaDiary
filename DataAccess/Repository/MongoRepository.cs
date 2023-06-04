@@ -1,15 +1,16 @@
 ﻿using System.Linq.Expressions;
 using MongoDB.Driver;
 using DataAccess.IDataAccess;
+using DiaDiary;
 
 
 namespace DataAccess;
 
 public class MongoRepository<T> : IMongoRepository<T> where T : class
 {
-    private static MongoClient _mongoClient = new MongoClient();
-    private static IMongoDatabase _db;
-    private static IMongoCollection<T> _collection;
+    private readonly MongoClient _mongoClient = new MongoClient();
+    private readonly IMongoDatabase _db;
+    private readonly IMongoCollection<T> _collection;
 
     public MongoRepository(string databaseName, string collectionName)
     {
