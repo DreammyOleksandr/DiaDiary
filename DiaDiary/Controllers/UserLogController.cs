@@ -8,6 +8,14 @@ namespace DiaDiary.Controllers;
 
 public class UserLogController
 {
+    public readonly MenuElements menuElements = new MenuElements()
+    {
+        options = new string[]
+        {
+            "Create", "Read", "Update", "Delete", "Delete All", "About", "Exit"
+        }
+    };
+
     private readonly MongoRepository<UserLog> _mongoRepository;
     private readonly ApplicationUser _applicationUser;
 
@@ -17,14 +25,13 @@ public class UserLogController
         _applicationUser = applicationUser;
     }
 
-
-    public dynamic UserAction(int chosenAction) => chosenAction switch
+    public dynamic ActionsRouting(int chosenAction) => chosenAction switch
     {
         0 => Create(_applicationUser),
         1 => GetAll(_applicationUser),
         2 => Update(_applicationUser),
-        3 => Delete(),
-        4 => DeleteAll(),
+        3 => Delete(_applicationUser),
+        4 => DeleteAll(_applicationUser),
         5 => ContextActions.About(),
         6 => ContextActions.Exit(),
     };
@@ -47,21 +54,41 @@ public class UserLogController
     {
         Clear();
         WriteLine("Enter Id of log you want to replace");
-        string? userLogId = Console.ReadLine();
-        UserLog updatedUserLog = UserLogView.Update(userLogId);
-        updatedUserLog.AssignedTo = applicationUser;
-
-        await _mongoRepository.Update(x => x.Id == userLogId, updatedUserLog);
+        string? idToUpdate = Console.ReadLine();
+        var userLogToDelete = _mongoRepository.GetOne(x => x.Id == idToUpdate).Result;
+        if (userLogToDelete.AssignedTo.Id == applicationUser.Id)
+        {
+            UserLog updatedUserLog = UserLogView.Update(idToUpdate);
+            updatedUserLog.AssignedTo = applicationUser;
+            
+            await _mongoRepository.Update(x => x.Id == idToUpdate, updatedUserLog);
+        }
+        else
+        {
+            Messages.LogNotFound();
+        }
     }
 
-    private async Task Delete()
+    private async Task Delete(ApplicationUser applicationUser)
     {
         string IdToDelete = UserLogView.Delete();
-        await _mongoRepository.Delete(x => x.Id == IdToDelete);
+        var userLogToDelete = _mongoRepository.GetOne(x => x.Id == IdToDelete).Result;
+
+        if (userLogToDelete.AssignedTo.Id == applicationUser.Id)
+        {
+            Clear();
+            Messages.SuccessfulDeletion();
+            await _mongoRepository.Delete(x => x.Id == IdToDelete);
+        }
+        else
+        {
+            Clear();
+            Messages.LogNotFound();
+        }
     }
 
-    private async Task DeleteAll()
+    private async Task DeleteAll(ApplicationUser applicationUser)
     {
-        await _mongoRepository.DeleteAll();
+        await _mongoRepository.DeleteRange(_ => _.AssignedTo == applicationUser);
     }
 }
