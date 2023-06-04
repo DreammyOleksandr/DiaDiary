@@ -43,4 +43,10 @@ public class Messages
         WriteLine("User with this email already exists");
         AnyKeyToReturn();
     }
+
+    public static void LogNotFound()
+    {
+        WriteLine("There is no such log to delete");
+        AnyKeyToReturn();
+    }
 }
