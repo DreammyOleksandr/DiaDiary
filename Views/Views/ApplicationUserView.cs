@@ -29,4 +29,13 @@ public class ApplicationUserView
 
         return applicationUser;
     }
+
+    public static void GetInfo(ApplicationUser registeredUser)
+    {
+        Clear();
+        Write($"Em@il: {registeredUser.Email}\n");
+        Write($"Full Name: {registeredUser.FullName}\n");
+        Write("\nPress any key to continue...");
+        ReadKey();
+    }
 }

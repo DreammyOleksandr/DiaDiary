@@ -28,19 +28,18 @@ public class ApplicationUserController
 
     public dynamic ActionsRouting(int chosenAction) => chosenAction switch
     {
-        0 => Login(_applicationUser),
+        0 => LogIn(_applicationUser),
         1 => SignIn(_applicationUser),
         2 => ContextActions.Exit(),
     };
 
-
-    private ApplicationUser Login(ApplicationUser applicationUserToLogin)
+    private ApplicationUser LogIn(ApplicationUser applicationUserToLogin)
     {
         ApplicationUserView.Login(applicationUserToLogin);
 
-        var userToFind = _mongoRepository.GetOne(_ => _.Email == applicationUserToLogin.Email).Result;
+        var foundUser = _mongoRepository.GetOne(_ => _.Email == applicationUserToLogin.Email).Result;
 
-        if (userToFind == null)
+        if (foundUser == null)
         {
             Console.Clear();
             Messages.EmailError();
@@ -48,7 +47,7 @@ public class ApplicationUserController
             return applicationUserToLogin;
         }
 
-        if (userToFind.Email != null && PasswordHash(applicationUserToLogin.Password) == userToFind.Password)
+        if (foundUser.Email != null && PasswordHash(applicationUserToLogin.Password) == foundUser.Password)
         {
             Console.Clear();
             Messages.SuccessfulLogin();
@@ -83,6 +82,17 @@ public class ApplicationUserController
             registeredUser.Email = null;
             return registeredUser;
         }
+    }
+    
+    public async Task AccountActions(ApplicationUser registeredUser)
+    {
+        
+    }
+    
+    private async Task AccountInfo(ApplicationUser applicationUser)
+    {
+        ApplicationUser user = await _mongoRepository.GetOne(_ => _.Email == applicationUser.Email);
+        ApplicationUserView.GetInfo(user);
     }
 
     private string PasswordHash(string password)
