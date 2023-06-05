@@ -83,16 +83,25 @@ public class ApplicationUserController
             return registeredUser;
         }
     }
-    
+
     public async Task AccountActions(ApplicationUser registeredUser)
     {
-        
     }
-    
+
     private async Task AccountInfo(ApplicationUser applicationUser)
     {
         ApplicationUser user = await _mongoRepository.GetOne(_ => _.Email == applicationUser.Email);
         ApplicationUserView.GetInfo(user);
+    }
+
+    private async Task DeleteAccount(ApplicationUser applicationUser)
+    {
+        ApplicationUserView.AccountDeletion();
+        ConsoleKey keyPressed = Console.ReadKey().Key;
+        if (keyPressed == ConsoleKey.Enter)
+        {
+            await _mongoRepository.Delete(_ => _.Id == applicationUser.Id);
+        }
     }
 
     private string PasswordHash(string password)

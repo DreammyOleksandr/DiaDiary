@@ -38,4 +38,12 @@ public class ApplicationUserView
         Write("\nPress any key to continue...");
         ReadKey();
     }
+    
+    public static void AccountDeletion()
+    {
+        Clear();
+        WriteLine("This action will delete every log you ever made! Are you sure you want to continue?\n" +
+                  "Enter - Yes\n" +
+                  "Backspace - No\n");
+    }
 }
