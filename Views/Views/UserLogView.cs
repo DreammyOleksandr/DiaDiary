@@ -15,7 +15,8 @@ public class UserLogView
                       $"Short term insulin injected: {userLog.ShortTermInsulin}\n" +
                       $"Long term insulin injected: {userLog.LongTermInsulin}\n" +
                       $"Carbs eaten: {userLog.CarbsInBreadUnits}\n" +
-                      $"Notes: {userLog.Notes}\n");
+                      $"Notes: {userLog.Notes}\n" +
+                      $"{userLog.Date} {userLog.Time.Hour}:{userLog.Time.Minute}");
         }
         
         WriteLine("Press any key to continue...");
