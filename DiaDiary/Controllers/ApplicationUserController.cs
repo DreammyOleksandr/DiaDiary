@@ -94,19 +94,21 @@ public class ApplicationUserController
         ApplicationUserView.GetInfo(user);
     }
 
-    private async Task DeleteAccount(ApplicationUser applicationUser)
+    public async Task DeleteAccount(ApplicationUser applicationUser)
     {
+        var applicationUserFromDb = _mongoRepository.GetOne(_ => _.Email == applicationUser.Email).Result;
+        var applicationUserId = applicationUserFromDb.Id;
         ApplicationUserView.AccountDeletion();
         ConsoleKey keyPressed = Console.ReadKey().Key;
         if (keyPressed == ConsoleKey.Enter)
         {
-            await _mongoRepository.Delete(_ => _.Id == applicationUser.Id);
+            await _mongoRepository.Delete(_ => _.Id == applicationUserId);
         }
     }
 
     public async Task UpdateAccount(ApplicationUser applicationUser)
     {
-        var applicationUserFromDb = _mongoRepository.GetOne(x=>x.Email == applicationUser.Email).Result;
+        var applicationUserFromDb = _mongoRepository.GetOne(x => x.Email == applicationUser.Email).Result;
         var applicationUserId = applicationUserFromDb.Id;
         Console.Clear();
         Console.WriteLine("Enter password for further changes");
@@ -121,7 +123,7 @@ public class ApplicationUserController
             string hashedPassword = PasswordHash(applicationUser.Password);
             applicationUser.Password = hashedPassword;
 
-            await _mongoRepository.Update(_=>_.Id == applicationUserId, applicationUser);
+            await _mongoRepository.Update(_ => _.Id == applicationUserId, applicationUser);
         }
         else
         {
