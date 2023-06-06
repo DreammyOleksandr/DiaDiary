@@ -104,6 +104,33 @@ public class ApplicationUserController
         }
     }
 
+    public async Task UpdateAccount(ApplicationUser applicationUser)
+    {
+        var applicationUserFromDb = _mongoRepository.GetOne(x=>x.Email == applicationUser.Email).Result;
+        var applicationUserId = applicationUserFromDb.Id;
+        Console.Clear();
+        Console.WriteLine("Enter password for further changes");
+        string enteredPassword = Console.ReadLine();
+
+        if (enteredPassword == applicationUser.Password)
+        {
+            Console.Clear();
+            Messages.PasswordEnteredSuccessfully();
+            ApplicationUserView.AccountUpdate(applicationUser);
+            applicationUser.Id = applicationUserId;
+            string hashedPassword = PasswordHash(applicationUser.Password);
+            applicationUser.Password = hashedPassword;
+
+            await _mongoRepository.Update(_=>_.Id == applicationUserId, applicationUser);
+        }
+        else
+        {
+            Console.Clear();
+            Messages.PasswordError();
+        }
+    }
+
+
     private string PasswordHash(string password)
     {
         SHA256 hash = SHA256.Create();

@@ -46,4 +46,15 @@ public class ApplicationUserView
                   "Enter - Yes\n" +
                   "Backspace - No\n");
     }
+    
+    public static void AccountUpdate(ApplicationUser applicationUser)
+    {
+        Clear();
+        Write("Enter new, or same em@il: ");
+        applicationUser.Email = ReadLine();
+        Write("Enter new, or same password: ");
+        applicationUser.Password = ReadLine();
+        Write("Enter new, or same full name: ");
+        applicationUser.FullName = ReadLine();
+    }
 }
