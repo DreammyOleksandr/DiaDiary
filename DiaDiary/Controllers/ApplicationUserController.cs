@@ -9,14 +9,6 @@ namespace DiaDiary.Controllers;
 
 public class ApplicationUserController
 {
-    public MenuElements authenticationMenuElements = new MenuElements()
-    {
-        options = new string[]
-        {
-            "Log In", "Sign In", "Exit",
-        }
-    };
-
     private readonly MongoRepository<ApplicationUser> _mongoRepository;
     private readonly ApplicationUser _applicationUser;
 
