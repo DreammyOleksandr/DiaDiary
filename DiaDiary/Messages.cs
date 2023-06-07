@@ -57,15 +57,31 @@ public class Messages
         WriteLine("Log has been deleted successfully");
         AnyKeyToReturn();
     }
+
     public static void WarningToDeleteAll()
     {
         WriteLine("This action will delete every log you ever made! Are you sure you want to continue?\n" +
                   "Enter - Yes\n" +
                   "Backspace - No\n");
     }
+
     public static void PasswordEnteredSuccessfully()
     {
         WriteLine("Password was entered successfully");
         AnyKeyToContinue();
+    }
+
+    public static void AuthenticateToNewAccount()
+    {
+        WriteLine("To authenticate to new account you have to restart the application");
+    }
+
+    public static void EnterPasswordForFurtherChanges()
+    {
+        WriteLine("Enter password for further changes");
+    }
+    public static void IdOfLogToReplace()
+    {
+        WriteLine("Enter Id of log you want to replace");
     }
 }
