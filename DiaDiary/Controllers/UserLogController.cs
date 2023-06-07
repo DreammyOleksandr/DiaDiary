@@ -8,14 +8,6 @@ namespace DiaDiary.Controllers;
 
 public class UserLogController
 {
-    public readonly MenuElements menuElements = new MenuElements()
-    {
-        options = new string[]
-        {
-            "Create", "Read", "Update", "Delete", "Delete All", "Account", "About", "Exit"
-        }
-    };
-
     private readonly MongoRepository<UserLog> _mongoRepository;
     private readonly ApplicationUser _applicationUser;
     private readonly ApplicationUserController _applicationUserController;
@@ -30,7 +22,7 @@ public class UserLogController
 
     public dynamic UserActions()
     {
-        MenuElements menuElements =
+        MenuElements menuElementsForUserActions =
             new MenuElements()
             {
                 options = new string[]
@@ -53,7 +45,7 @@ public class UserLogController
 
         while (_applicationUser.Email != null)
         {
-            ScrollableMenu scrollableMenu = new ScrollableMenu(menuElements);
+            ScrollableMenu scrollableMenu = new ScrollableMenu(menuElementsForUserActions);
             int chosenAction = scrollableMenu.Run();
             dynamic execution = ActionsRouting(chosenAction);
         }
