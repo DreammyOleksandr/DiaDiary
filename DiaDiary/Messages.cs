@@ -62,7 +62,7 @@ public class Messages
     {
         WriteLine("This action will delete every log you ever made! Are you sure you want to continue?\n" +
                   "Enter - Yes\n" +
-                  "Backspace - No\n");
+                  "Any other key - No\n");
     }
 
     public static void PasswordEnteredSuccessfully()
