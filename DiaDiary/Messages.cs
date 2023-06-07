@@ -63,4 +63,9 @@ public class Messages
                   "Enter - Yes\n" +
                   "Backspace - No\n");
     }
+    public static void PasswordEnteredSuccessfully()
+    {
+        WriteLine("Password was entered successfully");
+        AnyKeyToContinue();
+    }
 }
