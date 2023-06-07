@@ -22,6 +22,7 @@ public class ApplicationUserController
     private ApplicationUser LogIn(ApplicationUser applicationUserToLogin)
     {
         ApplicationUserView.Login(applicationUserToLogin);
+        applicationUserToLogin.Password = PasswordHash(applicationUserToLogin.Password);
 
         var foundUser = _mongoRepository.GetOne(_ => _.Email == applicationUserToLogin.Email).Result;
 
@@ -33,7 +34,7 @@ public class ApplicationUserController
             return applicationUserToLogin;
         }
 
-        if (foundUser.Email != null && PasswordHash(applicationUserToLogin.Password) == foundUser.Password)
+        if (foundUser.Email != null && PasswordHash(applicationUserToLogin.Password) == PasswordHash(foundUser.Password))
         {
             Console.Clear();
             Messages.SuccessfulLogin();
@@ -150,8 +151,9 @@ public class ApplicationUserController
         Console.Clear();
         Messages.EnterPasswordForFurtherChanges();
         string enteredPassword = Console.ReadLine();
+        string hashedPasswordCheck = PasswordHash(enteredPassword);
 
-        if (enteredPassword == applicationUser.Password)
+        if (hashedPasswordCheck == applicationUser.Password)
         {
             Console.Clear();
             Messages.PasswordEnteredSuccessfully();
@@ -161,6 +163,10 @@ public class ApplicationUserController
             applicationUser.Password = hashedPassword;
 
             await _mongoRepository.Update(_ => _.Id == applicationUserId, applicationUser);
+
+            Console.Clear();
+            Messages.AuthenticateToNewAccount();
+            ContextActions.Exit();
         }
         else
         {
