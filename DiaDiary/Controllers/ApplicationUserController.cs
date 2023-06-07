@@ -9,11 +9,11 @@ namespace DiaDiary.Controllers;
 
 public class ApplicationUserController
 {
-    public readonly MenuElements menuElements = new MenuElements()
+    public MenuElements authenticationMenuElements = new MenuElements()
     {
         options = new string[]
         {
-            "LogIn", "SignIn", "Exit"
+            "Log In", "Sign In", "Exit",
         }
     };
 
@@ -26,12 +26,6 @@ public class ApplicationUserController
         _applicationUser = applicationUser;
     }
 
-    public dynamic ActionsRouting(int chosenAction) => chosenAction switch
-    {
-        0 => LogIn(_applicationUser),
-        1 => SignIn(_applicationUser),
-        2 => ContextActions.Exit(),
-    };
 
     private ApplicationUser LogIn(ApplicationUser applicationUserToLogin)
     {
@@ -84,8 +78,56 @@ public class ApplicationUserController
         }
     }
 
-    public async Task AccountActions(ApplicationUser registeredUser)
+    public dynamic AuthenticationActions(dynamic accountActionsRouting)
     {
+        MenuElements menuElementsForAccountActions =
+            new MenuElements()
+            {
+                options = new string[]
+                {
+                    "Log In", "Sign In", "Exit"
+                }
+            };
+
+        dynamic AuthenticationRouting(int chosenAction) => chosenAction switch
+        {
+            0 => LogIn(_applicationUser),
+            1 => SignIn(_applicationUser),
+            2 => ContextActions.Exit(),
+        };
+
+        while (_applicationUser.Email == null)
+        {
+            ScrollableMenu scrollableMenu = new ScrollableMenu(menuElementsForAccountActions);
+            int chosenAction = scrollableMenu.Run();
+            var execution = AuthenticationActions(AuthenticationRouting(chosenAction));
+        }
+
+        return _applicationUser;
+    }
+
+    public dynamic AccountActions(dynamic accountActionsRouting)
+    {
+        MenuElements menuElementsForAccountActions =
+            new MenuElements()
+            {
+                options = new string[]
+                {
+                    "About Account", "Update Account", "Delete Account"
+                }
+            };
+
+        dynamic AccountActionsRouting(int chosenAction) => chosenAction switch
+        {
+            0 => AccountInfo(_applicationUser),
+            1 => UpdateAccount(_applicationUser),
+            2 => DeleteAccount(_applicationUser),
+        };
+
+        ScrollableMenu scrollableMenu = new ScrollableMenu(menuElementsForAccountActions);
+        int chosenAction = scrollableMenu.Run();
+        var execution = AccountActions(AccountActionsRouting(chosenAction));
+        return _applicationUser;
     }
 
     private async Task AccountInfo(ApplicationUser applicationUser)
@@ -94,7 +136,7 @@ public class ApplicationUserController
         ApplicationUserView.GetInfo(user);
     }
 
-    public async Task DeleteAccount(ApplicationUser applicationUser)
+    private async Task DeleteAccount(ApplicationUser applicationUser)
     {
         var applicationUserFromDb = _mongoRepository.GetOne(_ => _.Email == applicationUser.Email).Result;
         var applicationUserId = applicationUserFromDb.Id;
@@ -103,15 +145,18 @@ public class ApplicationUserController
         if (keyPressed == ConsoleKey.Enter)
         {
             await _mongoRepository.Delete(_ => _.Id == applicationUserId);
+            Console.Clear();
+            Messages.AuthenticateToNewAccount();
+            ContextActions.Exit();
         }
     }
 
-    public async Task UpdateAccount(ApplicationUser applicationUser)
+    private async Task UpdateAccount(ApplicationUser applicationUser)
     {
         var applicationUserFromDb = _mongoRepository.GetOne(x => x.Email == applicationUser.Email).Result;
         var applicationUserId = applicationUserFromDb.Id;
         Console.Clear();
-        Console.WriteLine("Enter password for further changes");
+        Messages.EnterPasswordForFurtherChanges();
         string enteredPassword = Console.ReadLine();
 
         if (enteredPassword == applicationUser.Password)
