@@ -15,8 +15,7 @@ public class UserLog
     public byte ShortTermInsulin { get; set; }
     public byte LongTermInsulin { get; set; }
     
-    public DateTime Date { get; set; } = DateTime.Today;
-    public DateTime Time { get; set; } = DateTime.Now;
+    public DateTime CreationTime { get; set; } = DateTime.Now;
 
     [Range(0, 250)] public string? Notes { get; set; } 
     
