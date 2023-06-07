@@ -111,13 +111,9 @@ public class UserLogController
         ConsoleKey keyPressed = ReadKey().Key;
         if (keyPressed == ConsoleKey.Enter)
         {
+            Clear();
             Messages.SuccessfulDeletion();
             await _mongoRepository.DeleteRange(_ => _.AssignedTo == applicationUser);
-        }
-
-        if (keyPressed == ConsoleKey.Backspace)
-        {
-            return;
         }
     }
 }
