@@ -12,7 +12,7 @@ public class ApplicationUserController
     private readonly MongoRepository<ApplicationUser> _mongoRepository;
     private readonly ApplicationUser _applicationUser;
 
-    public ApplicationUserController(MongoRepository<ApplicationUser> mongoRepository, ApplicationUser applicationUser)
+    public ApplicationUserController(IMongoRepository<ApplicationUser> mongoRepository, ApplicationUser applicationUser)
     {
         _mongoRepository = mongoRepository;
         _applicationUser = applicationUser;
